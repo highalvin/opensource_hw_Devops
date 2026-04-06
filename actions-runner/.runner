@@ -1,0 +1,11 @@
+﻿{
+  "agentId": 2,
+  "agentName": "BOOK-8G2DSUHNS9",
+  "poolId": 1,
+  "poolName": "Default",
+  "serverUrl": "https://pipelinesghubeus22.actions.githubusercontent.com/itnRiwEmWhNUyfTZHejwxBBqdWk0NbaniizxMR4LOXqFGi9aJh/",
+  "gitHubUrl": "https://github.com/highalvin/opensource_hw_Devops",
+  "workFolder": "_work",
+  "useV2Flow": true,
+  "serverUrlV2": "https://broker.actions.githubusercontent.com/"
+}

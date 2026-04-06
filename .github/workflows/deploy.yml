@@ -1,0 +1,46 @@
+name: Deploy to Self-Hosted Runner
+
+on:
+  # 'Build and Push Docker Image' 워크플로우가 성공적으로 끝났을 때 자동으로 트리거됩니다.
+  workflow_run:
+    workflows: ["Build and Push Docker Image"]
+    types:
+      - completed
+
+jobs:
+  deploy:
+    # 이 작업은 로컬 컴퓨터(GitHub Self-hosted Runner)에서 직접 실행됩니다.
+    runs-on: self-hosted
+    
+    # 선행 CI 파이프라인이 성공했을 때만 배포(CD) 진행
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+
+    steps:
+      # 1. (선택 사항) 로컬 컴퓨터에서 Docker Hub에 로그인하기 위해 필요할 수 있습니다. 
+      # Rate Limit 방지나 Private 래포지토리 사용 시 활성화하세요.
+      # - name: Login to Docker Hub
+      #   run: echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
+
+      - name: Pull Latest Docker Image
+        run: |
+          docker pull ${{ secrets.DOCKERHUB_USERNAME }}/pixel-art-api:latest
+
+      - name: Stop and Remove Existing Container
+        run: |
+          # 기존 컨테이너가 없어도 에러 처리되어 파이프라인이 멈추지 않도록 || true 구문을 사용합니다.
+          docker stop pixel-art-api || true
+          docker rm pixel-art-api || true
+
+      - name: Run New Container
+        run: |
+          # 백그라운드(-d)로 실행하고, 이름 지정, 포트(8000 -> 80) 매핑 후 실행
+          docker run -d \
+            --name pixel-art-api \
+            -p 8000:80 \
+            --restart unless-stopped \
+            ${{ secrets.DOCKERHUB_USERNAME }}/pixel-art-api:latest
+
+      - name: Clean Up Unused Docker Images
+        run: |
+          # 기존 버전을 지우고 디스크 최적화를 위한 잉여(dangling) 이미지 삭제
+          docker image prune -f
