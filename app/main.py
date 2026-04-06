@@ -1,7 +1,8 @@
 from fastapi import FastAPI, File, UploadFile, Form
-from fastapi.responses import Response
+from fastapi.responses import Response, HTMLResponse
 from PIL import Image, ImageOps
 import io
+import os
 
 app = FastAPI(
     title="Pixel Art API",
@@ -77,6 +78,8 @@ async def convert_to_pixel_art(
     except Exception as e:
         return {"error": "이미지 처리 중 오류가 발생했습니다.", "detail": str(e)}
 
-@app.get("/")
+@app.get("/", response_class=HTMLResponse)
 def read_root():
-    return {"message":"CD test"}
+    html_path = os.path.join(os.path.dirname(__file__), "index.html")
+    with open(html_path, "r", encoding="utf-8") as f:
+        return f.read()
