@@ -1,0 +1,12 @@
+﻿{
+  "repositoryName": "highalvin/opensource_hw_Devops",
+  "pipelineDirectory": "opensource_hw_Devops",
+  "workspaceDirectory": "opensource_hw_Devops\\opensource_hw_Devops",
+  "repositories": {
+    "highalvin/opensource_hw_Devops": {
+      "repositoryPath": "opensource_hw_Devops\\opensource_hw_Devops",
+      "lastRunOn": "04/06/2026 21:00:45 +09:00"
+    }
+  },
+  "lastRunOn": "04/06/2026 21:00:45 +09:00"
+}
