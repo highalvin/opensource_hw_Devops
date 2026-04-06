@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pixel Art Studio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #8b5cf6;
+            --primary-glow: rgba(139, 92, 246, 0.5);
+            --bg-dark: #0f1115;
+            --bg-panel: #1a1d24;
+            --text-light: #f8fafc;
+            --text-muted: #94a3b8;
+            --border: rgba(255, 255, 255, 0.1);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Outfit', sans-serif; }
+        body {
+            background-color: var(--bg-dark); color: var(--text-light);
+            min-height: 100vh;
+            display: flex; flex-direction: column; align-items: center;
+            background-image: radial-gradient(circle at top, #2e1065 0%, transparent 40%);
+        }
+        header { text-align: center; margin: 3rem 0;}
+        h1 { font-size: 3rem; font-weight: 800; background: linear-gradient(to right, #c4b5fd, #8b5cf6); -webkit-background-clip: text; color: transparent; margin-bottom: 0.5rem; letter-spacing: -1px; }
+        p.subtitle { color: var(--text-muted); font-size: 1.1rem; }
+        .container {
+            width: 100%; max-width: 1000px;
+            display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; padding: 0 1rem;
+        }
+        .panel {
+            background: var(--bg-panel); border: 1px solid var(--border);
+            border-radius: 20px; padding: 2rem;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            backdrop-filter: blur(10px);
+        }
+        .upload-area {
+            border: 2px dashed var(--border); border-radius: 12px;
+            padding: 2rem; text-align: center; cursor: pointer; transition: all 0.3s ease;
+            position: relative; overflow: hidden; height: 180px; display: flex; align-items: center; justify-content: center; flex-direction: column;
+        }
+        .upload-area:hover, .upload-area.dragover { border-color: var(--primary); background: rgba(139, 92, 246, 0.05); }
+        .upload-area input { position: absolute; width: 100%; height: 100%; top: 0; left: 0; opacity: 0; cursor: pointer; }
+        .upload-area svg { color: var(--primary); margin-bottom: 1rem; transition: transform 0.3s ease; }
+        .upload-area:hover svg { transform: scale(1.1); }
+        .control-group { margin-top: 1.5rem; }
+        .control-label { display: flex; justify-content: space-between; margin-bottom: 0.5rem; font-weight: 600; color: var(--text-light); }
+        .slider {
+            width: 100%; -webkit-appearance: none; height: 6px; border-radius: 3px; background: #334155; outline: none; transition: 0.2s;
+        }
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none; appearance: none; width: 18px; height: 18px; border-radius: 50%; background: var(--primary); cursor: pointer;
+            box-shadow: 0 0 10px var(--primary-glow); transition: transform 0.1s;
+        }
+        .slider::-webkit-slider-thumb:hover { transform: scale(1.2); }
+        .toggle-group { display: flex; justify-content: space-between; margin-top: 1.5rem; }
+        .toggle-label { display: flex; align-items: center; gap: 0.5rem; cursor: pointer; font-size: 0.95rem; font-weight: 500;}
+        .toggle {
+            appearance: none; width: 44px; height: 24px; background: #334155; border-radius: 12px; position: relative; cursor: pointer; transition: 0.3s;
+        }
+        .toggle::before {
+            content: ''; position: absolute; width: 18px; height: 18px; background: white; border-radius: 50%; top: 3px; left: 3px; transition: 0.3s;
+        }
+        .toggle:checked { background: var(--primary); }
+        .toggle:checked::before { transform: translateX(20px); }
+        
+        .btn-submit {
+            width: 100%; padding: 1rem; margin-top: 2rem; border: none; border-radius: 10px;
+            background: var(--primary); color: white; font-size: 1.1rem; font-weight: 600; cursor: pointer;
+            transition: all 0.3s ease; box-shadow: 0 4px 15px var(--primary-glow);
+        }
+        .btn-submit:hover { background: var(--primary-hover); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(139, 92, 246, 0.7); }
+        .btn-submit:active { transform: translateY(0); }
+        .btn-submit:disabled { opacity: 0.5; cursor: not-allowed; transform: none; box-shadow: none; background: #334155;}
+        
+        .output-panel { display: flex; flex-direction: column; align-items: center; justify-content: flex-start; text-align: center; }
+        .image-preview {
+            width: 100%; aspect-ratio: 1; border-radius: 12px; border: 1px solid var(--border);
+            background: rgba(0,0,0,0.3); overflow: hidden; display: flex; align-items: center; justify-content: center; position: relative; box-shadow: inset 0 0 20px rgba(0,0,0,0.5);
+        }
+        
+        /* Checkered background for PNG transparencies */
+        .checkerboard {
+            background-color: #1a1a1a;
+            background-image: linear-gradient(45deg, #222 25%, transparent 25%, transparent 75%, #222 75%, #222),
+            linear-gradient(45deg, #222 25%, transparent 25%, transparent 75%, #222 75%, #222);
+            background-size: 20px 20px; background-position: 0 0, 10px 10px;
+        }
+
+        .image-preview img { width: 100%; height: 100%; object-fit: contain; }
+        .placeholder-icon { opacity: 0.3; }
+        .metadata { margin-top: 1.5rem; font-size: 0.9rem; color: var(--text-muted); text-align: left; width: 100%; background: rgba(0,0,0,0.2); padding: 1rem; border-radius: 8px;}
+        .metadata div { display: flex; justify-content: space-between; border-bottom: 1px solid var(--border); padding: 0.5rem 0;}
+        .metadata div:last-child { border-bottom: none; }
+        
+        .loader {
+            display: none; border: 4px solid rgba(255,255,255,0.1); border-left-color: var(--primary);
+            border-radius: 50%; width: 40px; height: 40px; animation: spin 1s linear infinite; position: absolute;
+        }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        
+        @media (max-width: 768px) {
+            .container { grid-template-columns: 1fr; margin-bottom: 3rem;}
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Pixel Art Studio</h1>
+        <p class="subtitle">Turn any photo into retro pixel art instantly</p>
+    </header>
+    
+    <div class="container">
+        <!-- Settings Panel -->
+        <div class="panel">
+            <h2 style="margin-bottom:1.5rem; font-size:1.4rem;">Generator Settings</h2>
+            
+            <div class="upload-area" id="uploadArea">
+                <input type="file" id="fileInput" accept="image/*">
+                <svg class="placeholder-icon" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
+                <div style="color:var(--text-light); font-weight:600; font-size:1.1rem; margin-top:0.5rem;" id="uploadText">Click or Drag Image Here</div>
+                <div style="font-size:0.85rem; color:var(--text-muted); margin-top:0.5rem;">Supports PNG, JPG, JPEG, WEBP</div>
+            </div>
+            
+            <div class="control-group">
+                <div class="control-label">
+                    <span>Pixel Size Level</span>
+                    <span id="pixelSizeVal">32 px</span>
+                </div>
+                <input type="range" class="slider" id="pixelSize" min="8" max="128" value="32" step="4">
+            </div>
+            
+            <div class="toggle-group">
+                <label class="toggle-label">
+                    <input type="checkbox" class="toggle" id="grayscale">
+                    <span>Grayscale</span>
+                </label>
+                <label class="toggle-label">
+                    <input type="checkbox" class="toggle" id="invert">
+                    <span>Invert Color</span>
+                </label>
+            </div>
+            
+            <button class="btn-submit" id="generateBtn" disabled>Generate Pixel Art</button>
+        </div>
+        
+        <!-- Output Panel -->
+        <div class="panel output-panel">
+            <h2 style="margin-bottom:1.5rem; font-size:1.4rem; align-self:flex-start;">Studio Output</h2>
+            
+            <div class="image-preview checkerboard" id="imagePreviewContainer">
+                <div class="loader" id="loader"></div>
+                <!-- Initial Icon -->
+                <svg id="emptyIcon" class="placeholder-icon" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+                <!-- Image goes here -->
+                <img id="resultImage" style="display:none;" />
+            </div>
+            
+            <div class="metadata" id="metadata">
+                <div><span>Applied Size:</span> <strong id="metaSize" style="color: var(--text-light)">-</strong></div>
+                <div><span>Grayscale:</span> <strong id="metaGray" style="color: var(--text-light)">-</strong></div>
+                <div><span>Inverted:</span> <strong id="metaInv" style="color: var(--text-light)">-</strong></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const fileInput = document.getElementById('fileInput');
+        const uploadArea = document.getElementById('uploadArea');
+        const uploadText = document.getElementById('uploadText');
+        const pixelSize = document.getElementById('pixelSize');
+        const pixelSizeVal = document.getElementById('pixelSizeVal');
+        const generateBtn = document.getElementById('generateBtn');
+        const resultImage = document.getElementById('resultImage');
+        const emptyIcon = document.getElementById('emptyIcon');
+        const loader = document.getElementById('loader');
+        
+        let selectedFile = null;
+
+        pixelSize.addEventListener('input', (e) => {
+            pixelSizeVal.innerText = `${e.target.value} px`;
+        });
+
+        const handleFile = (file) => {
+            if (file && file.type.startsWith('image/')) {
+                selectedFile = file;
+                uploadText.innerText = selectedFile.name;
+                generateBtn.disabled = false;
+                resultImage.style.display = 'none';
+                emptyIcon.style.display = 'block';
+                
+                // Show original briefly
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    resultImage.src = e.target.result;
+                    resultImage.style.display = 'block';
+                    emptyIcon.style.display = 'none';
+                }
+                reader.readAsDataURL(file);
+            }
+        };
+
+        fileInput.addEventListener('change', (e) => handleFile(e.target.files[0]));
+
+        uploadArea.addEventListener('dragover', (e) => { 
+            e.preventDefault(); 
+            uploadArea.classList.add('dragover'); 
+        });
+        
+        uploadArea.addEventListener('dragleave', () => {
+            uploadArea.classList.remove('dragover');
+        });
+        
+        uploadArea.addEventListener('drop', (e) => {
+            e.preventDefault(); 
+            uploadArea.classList.remove('dragover');
+            if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+                fileInput.files = e.dataTransfer.files;
+                handleFile(e.dataTransfer.files[0]);
+            }
+        });
+
+        generateBtn.addEventListener('click', async () => {
+            if (!selectedFile) return;
+            
+            generateBtn.disabled = true;
+            generateBtn.innerText = "Processing Magic...";
+            emptyIcon.style.display = 'none';
+            resultImage.style.opacity = '0.3';
+            loader.style.display = 'block';
+            
+            const formData = new FormData();
+            formData.append('file', selectedFile);
+            formData.append('pixel_size', pixelSize.value);
+            formData.append('grayscale', document.getElementById('grayscale').checked);
+            formData.append('invert', document.getElementById('invert').checked);
+
+            try {
+                const response = await fetch('/convert/', {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                if (!response.ok) throw new Error("API Error");
+                
+                document.getElementById('metaSize').innerText = `${response.headers.get('x-applied-pixel-size') || '-'} px`;
+                document.getElementById('metaGray').innerText = response.headers.get('x-applied-grayscale') === 'true' ? 'Yes' : 'No';
+                document.getElementById('metaInv').innerText = response.headers.get('x-applied-invert') === 'true' ? 'Yes' : 'No';
+
+                const blob = await response.blob();
+                const objUrl = URL.createObjectURL(blob);
+                
+                resultImage.src = objUrl;
+                resultImage.style.opacity = '1';
+                resultImage.style.display = 'block';
+            } catch (err) {
+                alert("Failed to process image.");
+                resultImage.style.opacity = '1';
+            } finally {
+                loader.style.display = 'none';
+                generateBtn.innerText = "Generate Pixel Art";
+                generateBtn.disabled = false;
+            }
+        });
+    </script>
+</body>
+</html>
