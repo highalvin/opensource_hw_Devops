@@ -1,0 +1,2500 @@
+[2026-04-06 12:39:28Z INFO HostContext] No proxy settings were found based on environmental variables (http_proxy/https_proxy/HTTP_PROXY/HTTPS_PROXY)
+[2026-04-06 12:39:28Z INFO HostContext] Well known directory 'Bin': 'C:\Users\leeky\OneDrive\바탕 화면\Hello_devOps_HW\actions-runner\bin'
+[2026-04-06 12:39:28Z INFO HostContext] Well known directory 'Root': 'C:\Users\leeky\OneDrive\바탕 화면\Hello_devOps_HW\actions-runner'
+[2026-04-06 12:39:28Z INFO HostContext] Well known config file 'Credentials': 'C:\Users\leeky\OneDrive\바탕 화면\Hello_devOps_HW\actions-runner\.credentials'
+[2026-04-06 12:39:28Z INFO HostContext] Well known directory 'Bin': 'C:\Users\leeky\OneDrive\바탕 화면\Hello_devOps_HW\actions-runner\bin'
+[2026-04-06 12:39:28Z INFO HostContext] Well known directory 'Root': 'C:\Users\leeky\OneDrive\바탕 화면\Hello_devOps_HW\actions-runner'
+[2026-04-06 12:39:28Z INFO HostContext] Well known config file 'Runner': 'C:\Users\leeky\OneDrive\바탕 화면\Hello_devOps_HW\actions-runner\.runner'
+[2026-04-06 12:39:28Z INFO Worker] Version: 2.333.1
+[2026-04-06 12:39:28Z INFO Worker] Commit: 6792966801e8925346735b68c03bf9f347af4646
+[2026-04-06 12:39:28Z INFO Worker] Culture: ko-KR
+[2026-04-06 12:39:28Z INFO Worker] UI Culture: ko-KR
+[2026-04-06 12:39:28Z INFO Worker] Waiting to receive the job message from the channel.
+[2026-04-06 12:39:28Z INFO ProcessChannel] Receiving message of length 35579, with hash '6789936c38ab550786f336c84fca37c250a91d7c68c98199a37120097ee54c4b'
+[2026-04-06 12:39:28Z INFO Worker] Message received.
+[2026-04-06 12:39:28Z INFO Worker] Job message:
+ {
+  "fileTable": [
+    ".github/workflows/deploy.yml"
+  ],
+  "mask": [
+    {
+      "type": "regex",
+      "value": "***"
+    },
+    {
+      "type": "regex",
+      "value": "***"
+    },
+    {
+      "type": "regex",
+      "value": "***"
+    },
+    {
+      "type": "regex",
+      "value": "***"
+    },
+    {
+      "type": "regex",
+      "value": "***"
+    },
+    {
+      "type": "regex",
+      "value": "***"
+    },
+    {
+      "type": "regex",
+      "value": "***"
+    },
+    {
+      "type": "regex",
+      "value": "***"
+    },
+    {
+      "type": "regex",
+      "value": "***"
+    },
+    {
+      "type": "regex",
+      "value": "***"
+    },
+    {
+      "type": "regex",
+      "value": "***"
+    },
+    {
+      "type": "regex",
+      "value": "***"
+    },
+    {
+      "type": "regex",
+      "value": "***"
+    },
+    {
+      "type": "regex",
+      "value": "***"
+    },
+    {
+      "type": "regex",
+      "value": "***"
+    },
+    {
+      "type": "regex",
+      "value": "***"
+    },
+    {
+      "type": "regex",
+      "value": "***"
+    },
+    {
+      "type": "regex",
+      "value": "***"
+    }
+  ],
+  "steps": [
+    {
+      "type": "action",
+      "reference": {
+        "type": "script"
+      },
+      "displayNameToken": {
+        "type": 0,
+        "file": 1,
+        "line": 24,
+        "col": 15,
+        "lit": "Pull Latest Docker Image"
+      },
+      "contextName": "__run",
+      "inputs": {
+        "type": 2,
+        "map": [
+          {
+            "key": "script",
+            "value": {
+              "type": 3,
+              "file": 1,
+              "line": 25,
+              "col": 14,
+              "expr": "format('docker pull {0}/pixel-art-api:latest\n', secrets.DOCKERHUB_USERNAME)"
+            }
+          }
+        ]
+      },
+      "condition": "success()",
+      "id": "454d7c3b-42bb-4ab3-a652-a5023286e1a1",
+      "name": "__run"
+    },
+    {
+      "type": "action",
+      "reference": {
+        "type": "script"
+      },
+      "displayNameToken": {
+        "type": 0,
+        "file": 1,
+        "line": 28,
+        "col": 15,
+        "lit": "Stop and Remove Existing Container"
+      },
+      "contextName": "__run_2",
+      "inputs": {
+        "type": 2,
+        "map": [
+          {
+            "key": "script",
+            "value": {
+              "type": 0,
+              "file": 1,
+              "line": 29,
+              "col": 14,
+              "lit": "# 기존 컨테이너가 없어도 에러 처리되어 파이프라인이 멈추지 않도록 || true 구문을 사용합니다.\ndocker stop pixel-art-api || true\ndocker rm pixel-art-api || true\n"
+            }
+          }
+        ]
+      },
+      "condition": "success()",
+      "id": "3dd34ae2-c82a-46d9-bd67-21d9079d10c5",
+      "name": "__run_2"
+    },
+    {
+      "type": "action",
+      "reference": {
+        "type": "script"
+      },
+      "displayNameToken": {
+        "type": 0,
+        "file": 1,
+        "line": 34,
+        "col": 15,
+        "lit": "Run New Container"
+      },
+      "contextName": "__run_3",
+      "inputs": {
+        "type": 2,
+        "map": [
+          {
+            "key": "script",
+            "value": {
+              "type": 3,
+              "file": 1,
+              "line": 35,
+              "col": 14,
+              "expr": "format('# 백그라운드(-d)로 실행하고, 이름 지정, 포트(8000 -> 80) 매핑 후 실행\ndocker run -d \\\n  --name pixel-art-api \\\n  -p 8000:80 \\\n  --restart unless-stopped \\\n  {0}/pixel-art-api:latest\n', secrets.DOCKERHUB_USERNAME)"
+            }
+          }
+        ]
+      },
+      "condition": "success()",
+      "id": "d4a70e6f-7aec-4855-8a1e-ba333cf65dab",
+      "name": "__run_3"
+    },
+    {
+      "type": "action",
+      "reference": {
+        "type": "script"
+      },
+      "displayNameToken": {
+        "type": 0,
+        "file": 1,
+        "line": 43,
+        "col": 15,
+        "lit": "Clean Up Unused Docker Images"
+      },
+      "contextName": "__run_4",
+      "inputs": {
+        "type": 2,
+        "map": [
+          {
+            "key": "script",
+            "value": {
+              "type": 0,
+              "file": 1,
+              "line": 44,
+              "col": 14,
+              "lit": "# 기존 버전을 지우고 디스크 최적화를 위한 잉여(dangling) 이미지 삭제\ndocker image prune -f\n"
+            }
+          }
+        ]
+      },
+      "condition": "success()",
+      "id": "70dea667-b1b6-4669-8164-4ef110c34507",
+      "name": "__run_4"
+    }
+  ],
+  "variables": {
+    "Actions.EnableHttpRedirects": {
+      "value": "true"
+    },
+    "DOCKERHUB_USERNAME": {
+      "value": "***",
+      "isSecret": true
+    },
+    "DistributedTask.AddWarningToNode12Action": {
+      "value": "true"
+    },
+    "DistributedTask.AddWarningToNode16Action": {
+      "value": "true"
+    },
+    "DistributedTask.AllowRunnerContainerHooks": {
+      "value": "true"
+    },
+    "DistributedTask.DeprecateStepOutputCommands": {
+      "value": "true"
+    },
+    "DistributedTask.DetailUntarFailure": {
+      "value": "true"
+    },
+    "DistributedTask.EnableCompositeActions": {
+      "value": "true"
+    },
+    "DistributedTask.EnableJobServerQueueTelemetry": {
+      "value": "true"
+    },
+    "DistributedTask.EnhancedAnnotations": {
+      "value": "true"
+    },
+    "DistributedTask.ForceGithubJavascriptActionsToNode16": {
+      "value": "true"
+    },
+    "DistributedTask.ForceGithubJavascriptActionsToNode20": {
+      "value": "true"
+    },
+    "DistributedTask.LogTemplateErrorsAsDebugMessages": {
+      "value": "true"
+    },
+    "DistributedTask.MarkJobAsFailedOnWorkerCrash": {
+      "value": "true"
+    },
+    "DistributedTask.NewActionMetadata": {
+      "value": "true"
+    },
+    "DistributedTask.UploadStepSummary": {
+      "value": "true"
+    },
+    "DistributedTask.UseActionArchiveCache": {
+      "value": "true"
+    },
+    "DistributedTask.UseWhich2": {
+      "value": "true"
+    },
+    "RunService.FixEmbeddedIssues": {
+      "value": "true"
+    },
+    "actions.runner.requirenode24": {
+      "value": "false"
+    },
+    "actions.runner.usenode24bydefault": {
+      "value": "false"
+    },
+    "actions.runner.warnonnode20": {
+      "value": "true"
+    },
+    "actions_add_check_run_id_to_job_context": {
+      "value": "true"
+    },
+    "actions_batch_action_resolution": {
+      "value": "false"
+    },
+    "actions_container_action_runner_temp": {
+      "value": "true"
+    },
+    "actions_display_helpful_actions_download_errors": {
+      "value": "true"
+    },
+    "actions_runner_compare_workflow_parser": {
+      "value": "false"
+    },
+    "actions_runner_deprecate_linux_arm32": {
+      "value": "false"
+    },
+    "actions_runner_emit_composite_markers": {
+      "value": "false"
+    },
+    "actions_runner_kill_linux_arm32": {
+      "value": "false"
+    },
+    "actions_runner_node20_removal_date": {
+      "value": ""
+    },
+    "actions_runner_node24_default_date": {
+      "value": ""
+    },
+    "actions_service_container_command": {
+      "value": "true"
+    },
+    "actions_set_orchestration_id_env_for_actions": {
+      "value": "true"
+    },
+    "actions_skip_retry_complete_job_upon_known_errors": {
+      "value": "true"
+    },
+    "actions_snapshot_preflight_hosted_runner_check": {
+      "value": "false"
+    },
+    "actions_snapshot_preflight_image_gen_pool_check": {
+      "value": "false"
+    },
+    "actions_use_bearer_token_for_codeload": {
+      "value": "false"
+    },
+    "actions_uses_cache_service_v2": {
+      "value": "true"
+    },
+    "github_token": {
+      "value": "***",
+      "isSecret": true
+    },
+    "system.from_run_service": {
+      "value": "true"
+    },
+    "system.github.job": {
+      "value": "deploy"
+    },
+    "system.github.launch_endpoint": {
+      "value": "https://launch.actions.githubusercontent.com"
+    },
+    "system.github.results_endpoint": {
+      "value": "https://results-receiver.actions.githubusercontent.com/"
+    },
+    "system.github.results_upload_with_sdk": {
+      "value": "true"
+    },
+    "system.github.token": {
+      "value": "***",
+      "isSecret": true
+    },
+    "system.github.token.permissions": {
+      "value": "{\"Contents\":\"read\",\"Metadata\":\"read\",\"Packages\":\"read\"}"
+    },
+    "system.orchestrationId": {
+      "value": "17395d82-a8d6-437b-b229-30b29c4481ef.deploy.__default"
+    },
+    "system.phaseDisplayName": {
+      "value": "deploy"
+    },
+    "system.runner.lowdiskspacethreshold": {
+      "value": "100"
+    },
+    "system.runnerEnvironment": {
+      "value": "self-hosted"
+    },
+    "system.runnerGroupName": {
+      "value": "Default"
+    }
+  },
+  "messageType": "RunnerJobRequest",
+  "plan": {
+    "scopeIdentifier": "00000000-0000-0000-0000-000000000000",
+    "planType": "actions",
+    "version": 0,
+    "planId": "17395d82-a8d6-437b-b229-30b29c4481ef",
+    "planGroup": null,
+    "artifactUri": null,
+    "artifactLocation": null,
+    "definition": null,
+    "owner": null
+  },
+  "timeline": {
+    "id": "17395d82-a8d6-437b-b229-30b29c4481ef",
+    "changeId": 0,
+    "location": null
+  },
+  "jobId": "5ab6c62e-ac4a-5103-9686-ec31b74386e2",
+  "jobDisplayName": "deploy",
+  "jobName": "__default",
+  "requestId": 0,
+  "lockedUntil": "0001-01-01T00:00:00",
+  "resources": {
+    "endpoints": [
+      {
+        "data": {
+          "ServerId": "",
+          "ServerName": "",
+          "CacheServerUrl": "https://artifactcache.actions.githubusercontent.com/itnRiwEmWhNUyfTZHejwxBBqdWk0NbaniizxMR4LOXqFGi9aJh/",
+          "FeedStreamUrl": "wss://results-receiver.actions.githubusercontent.com/_ws/ingest.sock",
+          "ResultsServiceUrl": "https://results-receiver.actions.githubusercontent.com/",
+          "PipelinesServiceUrl": "https://pipelinesghubeus22.actions.githubusercontent.com/itnRiwEmWhNUyfTZHejwxBBqdWk0NbaniizxMR4LOXqFGi9aJh/",
+          "GenerateIdTokenUrl": "",
+          "ConnectivityChecks": "[\"https://broker.actions.githubusercontent.com/health\",\"https://token.actions.githubusercontent.com/ready\",\"https://run.actions.githubusercontent.com/health\"]"
+        },
+        "name": "SystemVssConnection",
+        "url": "https://run-actions-3-azure-eastus.actions.githubusercontent.com/164/",
+        "authorization": {
+          "parameters": {
+            "AccessToken": "***"
+          },
+          "scheme": "OAuth"
+        },
+        "isShared": false,
+        "isReady": true
+      }
+    ]
+  },
+  "contextData": {
+    "github": {
+      "t": 2,
+      "d": [
+        {
+          "k": "ref",
+          "v": "refs/heads/main"
+        },
+        {
+          "k": "sha",
+          "v": "953bc4f890b5224c9e3185aca2edd2c2674fe69f"
+        },
+        {
+          "k": "repository",
+          "v": "highalvin/opensource_hw_Devops"
+        },
+        {
+          "k": "repository_owner",
+          "v": "highalvin"
+        },
+        {
+          "k": "repository_owner_id",
+          "v": "102653117"
+        },
+        {
+          "k": "repositoryUrl",
+          "v": "git://github.com/highalvin/opensource_hw_Devops.git"
+        },
+        {
+          "k": "run_id",
+          "v": "24032103423"
+        },
+        {
+          "k": "run_number",
+          "v": "4"
+        },
+        {
+          "k": "retention_days",
+          "v": "90"
+        },
+        {
+          "k": "run_attempt",
+          "v": "2"
+        },
+        {
+          "k": "artifact_cache_size_limit",
+          "v": "10"
+        },
+        {
+          "k": "repository_visibility",
+          "v": "public"
+        },
+        {
+          "k": "actor_id",
+          "v": "102653117"
+        },
+        {
+          "k": "actor",
+          "v": "highalvin"
+        },
+        {
+          "k": "workflow",
+          "v": "Deploy to Self-Hosted Runner"
+        },
+        {
+          "k": "head_ref",
+          "v": ""
+        },
+        {
+          "k": "base_ref",
+          "v": ""
+        },
+        {
+          "k": "event_name",
+          "v": "workflow_run"
+        },
+        {
+          "k": "server_url",
+          "v": "https://github.com"
+        },
+        {
+          "k": "api_url",
+          "v": "https://api.github.com"
+        },
+        {
+          "k": "graphql_url",
+          "v": "https://api.github.com/graphql"
+        },
+        {
+          "k": "ref_name",
+          "v": "main"
+        },
+        {
+          "k": "ref_protected",
+          "v": false
+        },
+        {
+          "k": "ref_type",
+          "v": "branch"
+        },
+        {
+          "k": "secret_source",
+          "v": "Actions"
+        },
+        {
+          "k": "event",
+          "v": {
+            "t": 2,
+            "d": [
+              {
+                "k": "action",
+                "v": "completed"
+              },
+              {
+                "k": "repository",
+                "v": {
+                  "t": 2,
+                  "d": [
+                    {
+                      "k": "allow_forking",
+                      "v": true
+                    },
+                    {
+                      "k": "archive_url",
+                      "v": "https://api.github.com/repos/highalvin/opensource_hw_Devops/{archive_format}{/ref}"
+                    },
+                    {
+                      "k": "archived",
+                      "v": false
+                    },
+                    {
+                      "k": "assignees_url",
+                      "v": "https://api.github.com/repos/highalvin/opensource_hw_Devops/assignees{/user}"
+                    },
+                    {
+                      "k": "blobs_url",
+                      "v": "https://api.github.com/repos/highalvin/opensource_hw_Devops/git/blobs{/sha}"
+                    },
+                    {
+                      "k": "branches_url",
+                      "v": "https://api.github.com/repos/highalvin/opensource_hw_Devops/branches{/branch}"
+                    },
+                    {
+                      "k": "clone_url",
+                      "v": "https://github.com/highalvin/opensource_hw_Devops.git"
+                    },
+                    {
+                      "k": "collaborators_url",
+                      "v": "https://api.github.com/repos/highalvin/opensource_hw_Devops/collaborators{/collaborator}"
+                    },
+                    {
+                      "k": "comments_url",
+                      "v": "https://api.github.com/repos/highalvin/opensource_hw_Devops/comments{/number}"
+                    },
+                    {
+                      "k": "commits_url",
+                      "v": "https://api.github.com/repos/highalvin/opensource_hw_Devops/commits{/sha}"
+                    },
+                    {
+                      "k": "compare_url",
+                      "v": "https://api.github.com/repos/highalvin/opensource_hw_Devops/compare/{base}...{head}"
+                    },
+                    {
+                      "k": "contents_url",
+                      "v": "https://api.github.com/repos/highalvin/opensource_hw_Devops/contents/{+path}"
+                    },
+                    {
+                      "k": "contributors_url",
+                      "v": "https://api.github.com/repos/highalvin/opensource_hw_Devops/contributors"
+                    },
+                    {
+                      "k": "created_at",
+                      "v": "2026-04-06T05:24:32Z"
+                    },
+                    {
+                      "k": "default_branch",
+                      "v": "main"
+                    },
+                    {
+                      "k": "deployments_url",
+                      "v": "https://api.github.com/repos/highalvin/opensource_hw_Devops/deployments"
+                    },
+                    {
+                      "k": "description",
+                      "v": "Homework of ops"
+                    },
+                    {
+                      "k": "disabled",
+                      "v": false
+                    },
+                    {
+                      "k": "downloads_url",
+                      "v": "https://api.github.com/repos/highalvin/opensource_hw_Devops/downloads"
+                    },
+                    {
+                      "k": "events_url",
+                      "v": "https://api.github.com/repos/highalvin/opensource_hw_Devops/events"
+                    },
+                    {
+                      "k": "fork",
+                      "v": false
+                    },
+                    {
+                      "k": "forks",
+                      "v": 0.0
+                    },
+                    {
+                      "k": "forks_count",
+                      "v": 0.0
+                    },
+                    {
+                      "k": "forks_url",
+                      "v": "https://api.github.com/repos/highalvin/opensource_hw_Devops/forks"
+                    },
+                    {
+                      "k": "full_name",
+                      "v": "highalvin/opensource_hw_Devops"
+                    },
+                    {
+                      "k": "git_commits_url",
+                      "v": "https://api.github.com/repos/highalvin/opensource_hw_Devops/git/commits{/sha}"
+                    },
+                    {
+                      "k": "git_refs_url",
+                      "v": "https://api.github.com/repos/highalvin/opensource_hw_Devops/git/refs{/sha}"
+                    },
+                    {
+                      "k": "git_tags_url",
+                      "v": "https://api.github.com/repos/highalvin/opensource_hw_Devops/git/tags{/sha}"
+                    },
+                    {
+                      "k": "git_url",
+                      "v": "git://github.com/highalvin/opensource_hw_Devops.git"
+                    },
+                    {
+                      "k": "has_discussions",
+                      "v": false
+                    },
+                    {
+                      "k": "has_downloads",
+                      "v": true
+                    },
+                    {
+                      "k": "has_issues",
+                      "v": true
+                    },
+                    {
+                      "k": "has_pages",
+                      "v": false
+                    },
+                    {
+                      "k": "has_projects",
+                      "v": true
+                    },
+                    {
+                      "k": "has_pull_requests",
+                      "v": true
+                    },
+                    {
+                      "k": "has_wiki",
+                      "v": true
+                    },
+                    {
+                      "k": "homepage",
+                      "v": null
+                    },
+                    {
+                      "k": "hooks_url",
+                      "v": "https://api.github.com/repos/highalvin/opensource_hw_Devops/hooks"
+                    },
+                    {
+                      "k": "html_url",
+                      "v": "https://github.com/highalvin/opensource_hw_Devops"
+                    },
+                    {
+                      "k": "id",
+                      "v": 1202517204.0
+                    },
+                    {
+                      "k": "is_template",
+                      "v": false
+                    },
+                    {
+                      "k": "issue_comment_url",
+                      "v": "https://api.github.com/repos/highalvin/opensource_hw_Devops/issues/comments{/number}"
+                    },
+                    {
+                      "k": "issue_events_url",
+                      "v": "https://api.github.com/repos/highalvin/opensource_hw_Devops/issues/events{/number}"
+                    },
+                    {
+                      "k": "issues_url",
+                      "v": "https://api.github.com/repos/highalvin/opensource_hw_Devops/issues{/number}"
+                    },
+                    {
+                      "k": "keys_url",
+                      "v": "https://api.github.com/repos/highalvin/opensource_hw_Devops/keys{/key_id}"
+                    },
+                    {
+                      "k": "labels_url",
+                      "v": "https://api.github.com/repos/highalvin/opensource_hw_Devops/labels{/name}"
+                    },
+                    {
+                      "k": "language",
+                      "v": "JavaScript"
+                    },
+                    {
+                      "k": "languages_url",
+                      "v": "https://api.github.com/repos/highalvin/opensource_hw_Devops/languages"
+                    },
+                    {
+                      "k": "license",
+                      "v": null
+                    },
+                    {
+                      "k": "merges_url",
+                      "v": "https://api.github.com/repos/highalvin/opensource_hw_Devops/merges"
+                    },
+                    {
+                      "k": "milestones_url",
+                      "v": "https://api.github.com/repos/highalvin/opensource_hw_Devops/milestones{/number}"
+                    },
+                    {
+                      "k": "mirror_url",
+                      "v": null
+                    },
+                    {
+                      "k": "name",
+                      "v": "opensource_hw_Devops"
+                    },
+                    {
+                      "k": "node_id",
+                      "v": "R_kgDOR6z01A"
+                    },
+                    {
+                      "k": "notifications_url",
+                      "v": "https://api.github.com/repos/highalvin/opensource_hw_Devops/notifications{?since,all,participating}"
+                    },
+                    {
+                      "k": "open_issues",
+                      "v": 0.0
+                    },
+                    {
+                      "k": "open_issues_count",
+                      "v": 0.0
+                    },
+                    {
+                      "k": "owner",
+                      "v": {
+                        "t": 2,
+                        "d": [
+                          {
+                            "k": "avatar_url",
+                            "v": "https://avatars.githubusercontent.com/u/102653117?v=4"
+                          },
+                          {
+                            "k": "events_url",
+                            "v": "https://api.github.com/users/highalvin/events{/privacy}"
+                          },
+                          {
+                            "k": "followers_url",
+                            "v": "https://api.github.com/users/highalvin/followers"
+                          },
+                          {
+                            "k": "following_url",
+                            "v": "https://api.github.com/users/highalvin/following{/other_user}"
+                          },
+                          {
+                            "k": "gists_url",
+                            "v": "https://api.github.com/users/highalvin/gists{/gist_id}"
+                          },
+                          {
+                            "k": "gravatar_id",
+                            "v": ""
+                          },
+                          {
+                            "k": "html_url",
+                            "v": "https://github.com/highalvin"
+                          },
+                          {
+                            "k": "id",
+                            "v": 102653117.0
+                          },
+                          {
+                            "k": "login",
+                            "v": "highalvin"
+                          },
+                          {
+                            "k": "node_id",
+                            "v": "U_kgDOBh5cvQ"
+                          },
+                          {
+                            "k": "organizations_url",
+                            "v": "https://api.github.com/users/highalvin/orgs"
+                          },
+                          {
+                            "k": "received_events_url",
+                            "v": "https://api.github.com/users/highalvin/received_events"
+                          },
+                          {
+                            "k": "repos_url",
+                            "v": "https://api.github.com/users/highalvin/repos"
+                          },
+                          {
+                            "k": "site_admin",
+                            "v": false
+                          },
+                          {
+                            "k": "starred_url",
+                            "v": "https://api.github.com/users/highalvin/starred{/owner}{/repo}"
+                          },
+                          {
+                            "k": "subscriptions_url",
+                            "v": "https://api.github.com/users/highalvin/subscriptions"
+                          },
+                          {
+                            "k": "type",
+                            "v": "User"
+                          },
+                          {
+                            "k": "url",
+                            "v": "https://api.github.com/users/highalvin"
+                          },
+                          {
+                            "k": "user_view_type",
+                            "v": "public"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "k": "private",
+                      "v": false
+                    },
+                    {
+                      "k": "pull_request_creation_policy",
+                      "v": "all"
+                    },
+                    {
+                      "k": "pulls_url",
+                      "v": "https://api.github.com/repos/highalvin/opensource_hw_Devops/pulls{/number}"
+                    },
+                    {
+                      "k": "pushed_at",
+                      "v": "2026-04-06T12:38:03Z"
+                    },
+                    {
+                      "k": "releases_url",
+                      "v": "https://api.github.com/repos/highalvin/opensource_hw_Devops/releases{/id}"
+                    },
+                    {
+                      "k": "size",
+                      "v": 177171.0
+                    },
+                    {
+                      "k": "ssh_url",
+                      "v": "git@github.com:highalvin/opensource_hw_Devops.git"
+                    },
+                    {
+                      "k": "stargazers_count",
+                      "v": 0.0
+                    },
+                    {
+                      "k": "stargazers_url",
+                      "v": "https://api.github.com/repos/highalvin/opensource_hw_Devops/stargazers"
+                    },
+                    {
+                      "k": "statuses_url",
+                      "v": "https://api.github.com/repos/highalvin/opensource_hw_Devops/statuses/{sha}"
+                    },
+                    {
+                      "k": "subscribers_url",
+                      "v": "https://api.github.com/repos/highalvin/opensource_hw_Devops/subscribers"
+                    },
+                    {
+                      "k": "subscription_url",
+                      "v": "https://api.github.com/repos/highalvin/opensource_hw_Devops/subscription"
+                    },
+                    {
+                      "k": "svn_url",
+                      "v": "https://github.com/highalvin/opensource_hw_Devops"
+                    },
+                    {
+                      "k": "tags_url",
+                      "v": "https://api.github.com/repos/highalvin/opensource_hw_Devops/tags"
+                    },
+                    {
+                      "k": "teams_url",
+                      "v": "https://api.github.com/repos/highalvin/opensource_hw_Devops/teams"
+                    },
+                    {
+                      "k": "topics",
+                      "v": {
+                        "t": 1
+                      }
+                    },
+                    {
+                      "k": "trees_url",
+                      "v": "https://api.github.com/repos/highalvin/opensource_hw_Devops/git/trees{/sha}"
+                    },
+                    {
+                      "k": "updated_at",
+                      "v": "2026-04-06T12:38:09Z"
+                    },
+                    {
+                      "k": "url",
+                      "v": "https://api.github.com/repos/highalvin/opensource_hw_Devops"
+                    },
+                    {
+                      "k": "visibility",
+                      "v": "public"
+                    },
+                    {
+                      "k": "watchers",
+                      "v": 0.0
+                    },
+                    {
+                      "k": "watchers_count",
+                      "v": 0.0
+                    },
+                    {
+                      "k": "web_commit_signoff_required",
+                      "v": false
+                    }
+                  ]
+                }
+              },
+              {
+                "k": "sender",
+                "v": {
+                  "t": 2,
+                  "d": [
+                    {
+                      "k": "avatar_url",
+                      "v": "https://avatars.githubusercontent.com/u/102653117?v=4"
+                    },
+                    {
+                      "k": "events_url",
+                      "v": "https://api.github.com/users/highalvin/events{/privacy}"
+                    },
+                    {
+                      "k": "followers_url",
+                      "v": "https://api.github.com/users/highalvin/followers"
+                    },
+                    {
+                      "k": "following_url",
+                      "v": "https://api.github.com/users/highalvin/following{/other_user}"
+                    },
+                    {
+                      "k": "gists_url",
+                      "v": "https://api.github.com/users/highalvin/gists{/gist_id}"
+                    },
+                    {
+                      "k": "gravatar_id",
+                      "v": ""
+                    },
+                    {
+                      "k": "html_url",
+                      "v": "https://github.com/highalvin"
+                    },
+                    {
+                      "k": "id",
+                      "v": 102653117.0
+                    },
+                    {
+                      "k": "login",
+                      "v": "highalvin"
+                    },
+                    {
+                      "k": "node_id",
+                      "v": "U_kgDOBh5cvQ"
+                    },
+                    {
+                      "k": "organizations_url",
+                      "v": "https://api.github.com/users/highalvin/orgs"
+                    },
+                    {
+                      "k": "received_events_url",
+                      "v": "https://api.github.com/users/highalvin/received_events"
+                    },
+                    {
+                      "k": "repos_url",
+                      "v": "https://api.github.com/users/highalvin/repos"
+                    },
+                    {
+                      "k": "site_admin",
+                      "v": false
+                    },
+                    {
+                      "k": "starred_url",
+                      "v": "https://api.github.com/users/highalvin/starred{/owner}{/repo}"
+                    },
+                    {
+                      "k": "subscriptions_url",
+                      "v": "https://api.github.com/users/highalvin/subscriptions"
+                    },
+                    {
+                      "k": "type",
+                      "v": "User"
+                    },
+                    {
+                      "k": "url",
+                      "v": "https://api.github.com/users/highalvin"
+                    },
+                    {
+                      "k": "user_view_type",
+                      "v": "public"
+                    }
+                  ]
+                }
+              },
+              {
+                "k": "workflow",
+                "v": {
+                  "t": 2,
+                  "d": [
+                    {
+                      "k": "badge_url",
+                      "v": "https://github.com/highalvin/opensource_hw_Devops/workflows/Build%20and%20Push%20Docker%20Image/badge.svg"
+                    },
+                    {
+                      "k": "created_at",
+                      "v": "2026-04-06T11:07:10.000Z"
+                    },
+                    {
+                      "k": "html_url",
+                      "v": "https://github.com/highalvin/opensource_hw_Devops/blob/main/.github/workflows/ci.yml"
+                    },
+                    {
+                      "k": "id",
+                      "v": 256809325.0
+                    },
+                    {
+                      "k": "name",
+                      "v": "Build and Push Docker Image"
+                    },
+                    {
+                      "k": "node_id",
+                      "v": "W_kwDOR6z01M4PTplt"
+                    },
+                    {
+                      "k": "path",
+                      "v": ".github/workflows/ci.yml"
+                    },
+                    {
+                      "k": "state",
+                      "v": "active"
+                    },
+                    {
+                      "k": "updated_at",
+                      "v": "2026-04-06T11:07:10.000Z"
+                    },
+                    {
+                      "k": "url",
+                      "v": "https://api.github.com/repos/highalvin/opensource_hw_Devops/actions/workflows/256809325"
+                    }
+                  ]
+                }
+              },
+              {
+                "k": "workflow_run",
+                "v": {
+                  "t": 2,
+                  "d": [
+                    {
+                      "k": "actor",
+                      "v": {
+                        "t": 2,
+                        "d": [
+                          {
+                            "k": "avatar_url",
+                            "v": "https://avatars.githubusercontent.com/u/102653117?v=4"
+                          },
+                          {
+                            "k": "events_url",
+                            "v": "https://api.github.com/users/highalvin/events{/privacy}"
+                          },
+                          {
+                            "k": "followers_url",
+                            "v": "https://api.github.com/users/highalvin/followers"
+                          },
+                          {
+                            "k": "following_url",
+                            "v": "https://api.github.com/users/highalvin/following{/other_user}"
+                          },
+                          {
+                            "k": "gists_url",
+                            "v": "https://api.github.com/users/highalvin/gists{/gist_id}"
+                          },
+                          {
+                            "k": "gravatar_id",
+                            "v": ""
+                          },
+                          {
+                            "k": "html_url",
+                            "v": "https://github.com/highalvin"
+                          },
+                          {
+                            "k": "id",
+                            "v": 102653117.0
+                          },
+                          {
+                            "k": "login",
+                            "v": "highalvin"
+                          },
+                          {
+                            "k": "node_id",
+                            "v": "U_kgDOBh5cvQ"
+                          },
+                          {
+                            "k": "organizations_url",
+                            "v": "https://api.github.com/users/highalvin/orgs"
+                          },
+                          {
+                            "k": "received_events_url",
+                            "v": "https://api.github.com/users/highalvin/received_events"
+                          },
+                          {
+                            "k": "repos_url",
+                            "v": "https://api.github.com/users/highalvin/repos"
+                          },
+                          {
+                            "k": "site_admin",
+                            "v": false
+                          },
+                          {
+                            "k": "starred_url",
+                            "v": "https://api.github.com/users/highalvin/starred{/owner}{/repo}"
+                          },
+                          {
+                            "k": "subscriptions_url",
+                            "v": "https://api.github.com/users/highalvin/subscriptions"
+                          },
+                          {
+                            "k": "type",
+                            "v": "User"
+                          },
+                          {
+                            "k": "url",
+                            "v": "https://api.github.com/users/highalvin"
+                          },
+                          {
+                            "k": "user_view_type",
+                            "v": "public"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "k": "artifacts_url",
+                      "v": "https://api.github.com/repos/highalvin/opensource_hw_Devops/actions/runs/24032090671/artifacts"
+                    },
+                    {
+                      "k": "cancel_url",
+                      "v": "https://api.github.com/repos/highalvin/opensource_hw_Devops/actions/runs/24032090671/cancel"
+                    },
+                    {
+                      "k": "check_suite_id",
+                      "v": 63459100044.0
+                    },
+                    {
+                      "k": "check_suite_node_id",
+                      "v": "CS_kwDOR6z01M8AAAAOxnUFjA"
+                    },
+                    {
+                      "k": "check_suite_url",
+                      "v": "https://api.github.com/repos/highalvin/opensource_hw_Devops/check-suites/63459100044"
+                    },
+                    {
+                      "k": "conclusion",
+                      "v": "success"
+                    },
+                    {
+                      "k": "created_at",
+                      "v": "2026-04-06T12:38:04Z"
+                    },
+                    {
+                      "k": "display_title",
+                      "v": "fix deploy yml for windows powershell"
+                    },
+                    {
+                      "k": "event",
+                      "v": "push"
+                    },
+                    {
+                      "k": "head_branch",
+                      "v": "main"
+                    },
+                    {
+                      "k": "head_commit",
+                      "v": {
+                        "t": 2,
+                        "d": [
+                          {
+                            "k": "author",
+                            "v": {
+                              "t": 2,
+                              "d": [
+                                {
+                                  "k": "email",
+                                  "v": "leekyungmeen@gmail.com"
+                                },
+                                {
+                                  "k": "name",
+                                  "v": "highalvin"
+                                }
+                              ]
+                            }
+                          },
+                          {
+                            "k": "committer",
+                            "v": {
+                              "t": 2,
+                              "d": [
+                                {
+                                  "k": "email",
+                                  "v": "leekyungmeen@gmail.com"
+                                },
+                                {
+                                  "k": "name",
+                                  "v": "highalvin"
+                                }
+                              ]
+                            }
+                          },
+                          {
+                            "k": "id",
+                            "v": "953bc4f890b5224c9e3185aca2edd2c2674fe69f"
+                          },
+                          {
+                            "k": "message",
+                            "v": "fix deploy yml for windows powershell"
+                          },
+                          {
+                            "k": "timestamp",
+                            "v": "2026-04-06T12:37:53Z"
+                          },
+                          {
+                            "k": "tree_id",
+                            "v": "7da4116624e5f72dfe740eeb142313c9b55ce01f"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "k": "head_repository",
+                      "v": {
+                        "t": 2,
+                        "d": [
+                          {
+                            "k": "archive_url",
+                            "v": "https://api.github.com/repos/highalvin/opensource_hw_Devops/{archive_format}{/ref}"
+                          },
+                          {
+                            "k": "assignees_url",
+                            "v": "https://api.github.com/repos/highalvin/opensource_hw_Devops/assignees{/user}"
+                          },
+                          {
+                            "k": "blobs_url",
+                            "v": "https://api.github.com/repos/highalvin/opensource_hw_Devops/git/blobs{/sha}"
+                          },
+                          {
+                            "k": "branches_url",
+                            "v": "https://api.github.com/repos/highalvin/opensource_hw_Devops/branches{/branch}"
+                          },
+                          {
+                            "k": "collaborators_url",
+                            "v": "https://api.github.com/repos/highalvin/opensource_hw_Devops/collaborators{/collaborator}"
+                          },
+                          {
+                            "k": "comments_url",
+                            "v": "https://api.github.com/repos/highalvin/opensource_hw_Devops/comments{/number}"
+                          },
+                          {
+                            "k": "commits_url",
+                            "v": "https://api.github.com/repos/highalvin/opensource_hw_Devops/commits{/sha}"
+                          },
+                          {
+                            "k": "compare_url",
+                            "v": "https://api.github.com/repos/highalvin/opensource_hw_Devops/compare/{base}...{head}"
+                          },
+                          {
+                            "k": "contents_url",
+                            "v": "https://api.github.com/repos/highalvin/opensource_hw_Devops/contents/{+path}"
+                          },
+                          {
+                            "k": "contributors_url",
+                            "v": "https://api.github.com/repos/highalvin/opensource_hw_Devops/contributors"
+                          },
+                          {
+                            "k": "deployments_url",
+                            "v": "https://api.github.com/repos/highalvin/opensource_hw_Devops/deployments"
+                          },
+                          {
+                            "k": "description",
+                            "v": "Homework of ops"
+                          },
+                          {
+                            "k": "downloads_url",
+                            "v": "https://api.github.com/repos/highalvin/opensource_hw_Devops/downloads"
+                          },
+                          {
+                            "k": "events_url",
+                            "v": "https://api.github.com/repos/highalvin/opensource_hw_Devops/events"
+                          },
+                          {
+                            "k": "fork",
+                            "v": false
+                          },
+                          {
+                            "k": "forks_url",
+                            "v": "https://api.github.com/repos/highalvin/opensource_hw_Devops/forks"
+                          },
+                          {
+                            "k": "full_name",
+                            "v": "highalvin/opensource_hw_Devops"
+                          },
+                          {
+                            "k": "git_commits_url",
+                            "v": "https://api.github.com/repos/highalvin/opensource_hw_Devops/git/commits{/sha}"
+                          },
+                          {
+                            "k": "git_refs_url",
+                            "v": "https://api.github.com/repos/highalvin/opensource_hw_Devops/git/refs{/sha}"
+                          },
+                          {
+                            "k": "git_tags_url",
+                            "v": "https://api.github.com/repos/highalvin/opensource_hw_Devops/git/tags{/sha}"
+                          },
+                          {
+                            "k": "hooks_url",
+                            "v": "https://api.github.com/repos/highalvin/opensource_hw_Devops/hooks"
+                          },
+                          {
+                            "k": "html_url",
+                            "v": "https://github.com/highalvin/opensource_hw_Devops"
+                          },
+                          {
+                            "k": "id",
+                            "v": 1202517204.0
+                          },
+                          {
+                            "k": "issue_comment_url",
+                            "v": "https://api.github.com/repos/highalvin/opensource_hw_Devops/issues/comments{/number}"
+                          },
+                          {
+                            "k": "issue_events_url",
+                            "v": "https://api.github.com/repos/highalvin/opensource_hw_Devops/issues/events{/number}"
+                          },
+                          {
+                            "k": "issues_url",
+                            "v": "https://api.github.com/repos/highalvin/opensource_hw_Devops/issues{/number}"
+                          },
+                          {
+                            "k": "keys_url",
+                            "v": "https://api.github.com/repos/highalvin/opensource_hw_Devops/keys{/key_id}"
+                          },
+                          {
+                            "k": "labels_url",
+                            "v": "https://api.github.com/repos/highalvin/opensource_hw_Devops/labels{/name}"
+                          },
+                          {
+                            "k": "languages_url",
+                            "v": "https://api.github.com/repos/highalvin/opensource_hw_Devops/languages"
+                          },
+                          {
+                            "k": "merges_url",
+                            "v": "https://api.github.com/repos/highalvin/opensource_hw_Devops/merges"
+                          },
+                          {
+                            "k": "milestones_url",
+                            "v": "https://api.github.com/repos/highalvin/opensource_hw_Devops/milestones{/number}"
+                          },
+                          {
+                            "k": "name",
+                            "v": "opensource_hw_Devops"
+                          },
+                          {
+                            "k": "node_id",
+                            "v": "R_kgDOR6z01A"
+                          },
+                          {
+                            "k": "notifications_url",
+                            "v": "https://api.github.com/repos/highalvin/opensource_hw_Devops/notifications{?since,all,participating}"
+                          },
+                          {
+                            "k": "owner",
+                            "v": {
+                              "t": 2,
+                              "d": [
+                                {
+                                  "k": "avatar_url",
+                                  "v": "https://avatars.githubusercontent.com/u/102653117?v=4"
+                                },
+                                {
+                                  "k": "events_url",
+                                  "v": "https://api.github.com/users/highalvin/events{/privacy}"
+                                },
+                                {
+                                  "k": "followers_url",
+                                  "v": "https://api.github.com/users/highalvin/followers"
+                                },
+                                {
+                                  "k": "following_url",
+                                  "v": "https://api.github.com/users/highalvin/following{/other_user}"
+                                },
+                                {
+                                  "k": "gists_url",
+                                  "v": "https://api.github.com/users/highalvin/gists{/gist_id}"
+                                },
+                                {
+                                  "k": "gravatar_id",
+                                  "v": ""
+                                },
+                                {
+                                  "k": "html_url",
+                                  "v": "https://github.com/highalvin"
+                                },
+                                {
+                                  "k": "id",
+                                  "v": 102653117.0
+                                },
+                                {
+                                  "k": "login",
+                                  "v": "highalvin"
+                                },
+                                {
+                                  "k": "node_id",
+                                  "v": "U_kgDOBh5cvQ"
+                                },
+                                {
+                                  "k": "organizations_url",
+                                  "v": "https://api.github.com/users/highalvin/orgs"
+                                },
+                                {
+                                  "k": "received_events_url",
+                                  "v": "https://api.github.com/users/highalvin/received_events"
+                                },
+                                {
+                                  "k": "repos_url",
+                                  "v": "https://api.github.com/users/highalvin/repos"
+                                },
+                                {
+                                  "k": "site_admin",
+                                  "v": false
+                                },
+                                {
+                                  "k": "starred_url",
+                                  "v": "https://api.github.com/users/highalvin/starred{/owner}{/repo}"
+                                },
+                                {
+                                  "k": "subscriptions_url",
+                                  "v": "https://api.github.com/users/highalvin/subscriptions"
+                                },
+                                {
+                                  "k": "type",
+                                  "v": "User"
+                                },
+                                {
+                                  "k": "url",
+                                  "v": "https://api.github.com/users/highalvin"
+                                },
+                                {
+                                  "k": "user_view_type",
+                                  "v": "public"
+                                }
+                              ]
+                            }
+                          },
+                          {
+                            "k": "private",
+                            "v": false
+                          },
+                          {
+                            "k": "pulls_url",
+                            "v": "https://api.github.com/repos/highalvin/opensource_hw_Devops/pulls{/number}"
+                          },
+                          {
+                            "k": "releases_url",
+                            "v": "https://api.github.com/repos/highalvin/opensource_hw_Devops/releases{/id}"
+                          },
+                          {
+                            "k": "stargazers_url",
+                            "v": "https://api.github.com/repos/highalvin/opensource_hw_Devops/stargazers"
+                          },
+                          {
+                            "k": "statuses_url",
+                            "v": "https://api.github.com/repos/highalvin/opensource_hw_Devops/statuses/{sha}"
+                          },
+                          {
+                            "k": "subscribers_url",
+                            "v": "https://api.github.com/repos/highalvin/opensource_hw_Devops/subscribers"
+                          },
+                          {
+                            "k": "subscription_url",
+                            "v": "https://api.github.com/repos/highalvin/opensource_hw_Devops/subscription"
+                          },
+                          {
+                            "k": "tags_url",
+                            "v": "https://api.github.com/repos/highalvin/opensource_hw_Devops/tags"
+                          },
+                          {
+                            "k": "teams_url",
+                            "v": "https://api.github.com/repos/highalvin/opensource_hw_Devops/teams"
+                          },
+                          {
+                            "k": "trees_url",
+                            "v": "https://api.github.com/repos/highalvin/opensource_hw_Devops/git/trees{/sha}"
+                          },
+                          {
+                            "k": "url",
+                            "v": "https://api.github.com/repos/highalvin/opensource_hw_Devops"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "k": "head_sha",
+                      "v": "953bc4f890b5224c9e3185aca2edd2c2674fe69f"
+                    },
+                    {
+                      "k": "html_url",
+                      "v": "https://github.com/highalvin/opensource_hw_Devops/actions/runs/24032090671"
+                    },
+                    {
+                      "k": "id",
+                      "v": 24032090671.0
+                    },
+                    {
+                      "k": "jobs_url",
+                      "v": "https://api.github.com/repos/highalvin/opensource_hw_Devops/actions/runs/24032090671/jobs"
+                    },
+                    {
+                      "k": "logs_url",
+                      "v": "https://api.github.com/repos/highalvin/opensource_hw_Devops/actions/runs/24032090671/logs"
+                    },
+                    {
+                      "k": "name",
+                      "v": "Build and Push Docker Image"
+                    },
+                    {
+                      "k": "node_id",
+                      "v": "WFR_kwLOR6z01M8AAAAFmGyaLw"
+                    },
+                    {
+                      "k": "path",
+                      "v": ".github/workflows/ci.yml"
+                    },
+                    {
+                      "k": "previous_attempt_url",
+                      "v": null
+                    },
+                    {
+                      "k": "pull_requests",
+                      "v": {
+                        "t": 1
+                      }
+                    },
+                    {
+                      "k": "referenced_workflows",
+                      "v": {
+                        "t": 1
+                      }
+                    },
+                    {
+                      "k": "repository",
+                      "v": {
+                        "t": 2,
+                        "d": [
+                          {
+                            "k": "archive_url",
+                            "v": "https://api.github.com/repos/highalvin/opensource_hw_Devops/{archive_format}{/ref}"
+                          },
+                          {
+                            "k": "assignees_url",
+                            "v": "https://api.github.com/repos/highalvin/opensource_hw_Devops/assignees{/user}"
+                          },
+                          {
+                            "k": "blobs_url",
+                            "v": "https://api.github.com/repos/highalvin/opensource_hw_Devops/git/blobs{/sha}"
+                          },
+                          {
+                            "k": "branches_url",
+                            "v": "https://api.github.com/repos/highalvin/opensource_hw_Devops/branches{/branch}"
+                          },
+                          {
+                            "k": "collaborators_url",
+                            "v": "https://api.github.com/repos/highalvin/opensource_hw_Devops/collaborators{/collaborator}"
+                          },
+                          {
+                            "k": "comments_url",
+                            "v": "https://api.github.com/repos/highalvin/opensource_hw_Devops/comments{/number}"
+                          },
+                          {
+                            "k": "commits_url",
+                            "v": "https://api.github.com/repos/highalvin/opensource_hw_Devops/commits{/sha}"
+                          },
+                          {
+                            "k": "compare_url",
+                            "v": "https://api.github.com/repos/highalvin/opensource_hw_Devops/compare/{base}...{head}"
+                          },
+                          {
+                            "k": "contents_url",
+                            "v": "https://api.github.com/repos/highalvin/opensource_hw_Devops/contents/{+path}"
+                          },
+                          {
+                            "k": "contributors_url",
+                            "v": "https://api.github.com/repos/highalvin/opensource_hw_Devops/contributors"
+                          },
+                          {
+                            "k": "deployments_url",
+                            "v": "https://api.github.com/repos/highalvin/opensource_hw_Devops/deployments"
+                          },
+                          {
+                            "k": "description",
+                            "v": "Homework of ops"
+                          },
+                          {
+                            "k": "downloads_url",
+                            "v": "https://api.github.com/repos/highalvin/opensource_hw_Devops/downloads"
+                          },
+                          {
+                            "k": "events_url",
+                            "v": "https://api.github.com/repos/highalvin/opensource_hw_Devops/events"
+                          },
+                          {
+                            "k": "fork",
+                            "v": false
+                          },
+                          {
+                            "k": "forks_url",
+                            "v": "https://api.github.com/repos/highalvin/opensource_hw_Devops/forks"
+                          },
+                          {
+                            "k": "full_name",
+                            "v": "highalvin/opensource_hw_Devops"
+                          },
+                          {
+                            "k": "git_commits_url",
+                            "v": "https://api.github.com/repos/highalvin/opensource_hw_Devops/git/commits{/sha}"
+                          },
+                          {
+                            "k": "git_refs_url",
+                            "v": "https://api.github.com/repos/highalvin/opensource_hw_Devops/git/refs{/sha}"
+                          },
+                          {
+                            "k": "git_tags_url",
+                            "v": "https://api.github.com/repos/highalvin/opensource_hw_Devops/git/tags{/sha}"
+                          },
+                          {
+                            "k": "hooks_url",
+                            "v": "https://api.github.com/repos/highalvin/opensource_hw_Devops/hooks"
+                          },
+                          {
+                            "k": "html_url",
+                            "v": "https://github.com/highalvin/opensource_hw_Devops"
+                          },
+                          {
+                            "k": "id",
+                            "v": 1202517204.0
+                          },
+                          {
+                            "k": "issue_comment_url",
+                            "v": "https://api.github.com/repos/highalvin/opensource_hw_Devops/issues/comments{/number}"
+                          },
+                          {
+                            "k": "issue_events_url",
+                            "v": "https://api.github.com/repos/highalvin/opensource_hw_Devops/issues/events{/number}"
+                          },
+                          {
+                            "k": "issues_url",
+                            "v": "https://api.github.com/repos/highalvin/opensource_hw_Devops/issues{/number}"
+                          },
+                          {
+                            "k": "keys_url",
+                            "v": "https://api.github.com/repos/highalvin/opensource_hw_Devops/keys{/key_id}"
+                          },
+                          {
+                            "k": "labels_url",
+                            "v": "https://api.github.com/repos/highalvin/opensource_hw_Devops/labels{/name}"
+                          },
+                          {
+                            "k": "languages_url",
+                            "v": "https://api.github.com/repos/highalvin/opensource_hw_Devops/languages"
+                          },
+                          {
+                            "k": "merges_url",
+                            "v": "https://api.github.com/repos/highalvin/opensource_hw_Devops/merges"
+                          },
+                          {
+                            "k": "milestones_url",
+                            "v": "https://api.github.com/repos/highalvin/opensource_hw_Devops/milestones{/number}"
+                          },
+                          {
+                            "k": "name",
+                            "v": "opensource_hw_Devops"
+                          },
+                          {
+                            "k": "node_id",
+                            "v": "R_kgDOR6z01A"
+                          },
+                          {
+                            "k": "notifications_url",
+                            "v": "https://api.github.com/repos/highalvin/opensource_hw_Devops/notifications{?since,all,participating}"
+                          },
+                          {
+                            "k": "owner",
+                            "v": {
+                              "t": 2,
+                              "d": [
+                                {
+                                  "k": "avatar_url",
+                                  "v": "https://avatars.githubusercontent.com/u/102653117?v=4"
+                                },
+                                {
+                                  "k": "events_url",
+                                  "v": "https://api.github.com/users/highalvin/events{/privacy}"
+                                },
+                                {
+                                  "k": "followers_url",
+                                  "v": "https://api.github.com/users/highalvin/followers"
+                                },
+                                {
+                                  "k": "following_url",
+                                  "v": "https://api.github.com/users/highalvin/following{/other_user}"
+                                },
+                                {
+                                  "k": "gists_url",
+                                  "v": "https://api.github.com/users/highalvin/gists{/gist_id}"
+                                },
+                                {
+                                  "k": "gravatar_id",
+                                  "v": ""
+                                },
+                                {
+                                  "k": "html_url",
+                                  "v": "https://github.com/highalvin"
+                                },
+                                {
+                                  "k": "id",
+                                  "v": 102653117.0
+                                },
+                                {
+                                  "k": "login",
+                                  "v": "highalvin"
+                                },
+                                {
+                                  "k": "node_id",
+                                  "v": "U_kgDOBh5cvQ"
+                                },
+                                {
+                                  "k": "organizations_url",
+                                  "v": "https://api.github.com/users/highalvin/orgs"
+                                },
+                                {
+                                  "k": "received_events_url",
+                                  "v": "https://api.github.com/users/highalvin/received_events"
+                                },
+                                {
+                                  "k": "repos_url",
+                                  "v": "https://api.github.com/users/highalvin/repos"
+                                },
+                                {
+                                  "k": "site_admin",
+                                  "v": false
+                                },
+                                {
+                                  "k": "starred_url",
+                                  "v": "https://api.github.com/users/highalvin/starred{/owner}{/repo}"
+                                },
+                                {
+                                  "k": "subscriptions_url",
+                                  "v": "https://api.github.com/users/highalvin/subscriptions"
+                                },
+                                {
+                                  "k": "type",
+                                  "v": "User"
+                                },
+                                {
+                                  "k": "url",
+                                  "v": "https://api.github.com/users/highalvin"
+                                },
+                                {
+                                  "k": "user_view_type",
+                                  "v": "public"
+                                }
+                              ]
+                            }
+                          },
+                          {
+                            "k": "private",
+                            "v": false
+                          },
+                          {
+                            "k": "pulls_url",
+                            "v": "https://api.github.com/repos/highalvin/opensource_hw_Devops/pulls{/number}"
+                          },
+                          {
+                            "k": "releases_url",
+                            "v": "https://api.github.com/repos/highalvin/opensource_hw_Devops/releases{/id}"
+                          },
+                          {
+                            "k": "stargazers_url",
+                            "v": "https://api.github.com/repos/highalvin/opensource_hw_Devops/stargazers"
+                          },
+                          {
+                            "k": "statuses_url",
+                            "v": "https://api.github.com/repos/highalvin/opensource_hw_Devops/statuses/{sha}"
+                          },
+                          {
+                            "k": "subscribers_url",
+                            "v": "https://api.github.com/repos/highalvin/opensource_hw_Devops/subscribers"
+                          },
+                          {
+                            "k": "subscription_url",
+                            "v": "https://api.github.com/repos/highalvin/opensource_hw_Devops/subscription"
+                          },
+                          {
+                            "k": "tags_url",
+                            "v": "https://api.github.com/repos/highalvin/opensource_hw_Devops/tags"
+                          },
+                          {
+                            "k": "teams_url",
+                            "v": "https://api.github.com/repos/highalvin/opensource_hw_Devops/teams"
+                          },
+                          {
+                            "k": "trees_url",
+                            "v": "https://api.github.com/repos/highalvin/opensource_hw_Devops/git/trees{/sha}"
+                          },
+                          {
+                            "k": "url",
+                            "v": "https://api.github.com/repos/highalvin/opensource_hw_Devops"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "k": "rerun_url",
+                      "v": "https://api.github.com/repos/highalvin/opensource_hw_Devops/actions/runs/24032090671/rerun"
+                    },
+                    {
+                      "k": "run_attempt",
+                      "v": 1.0
+                    },
+                    {
+                      "k": "run_number",
+                      "v": 5.0
+                    },
+                    {
+                      "k": "run_started_at",
+                      "v": "2026-04-06T12:38:04Z"
+                    },
+                    {
+                      "k": "status",
+                      "v": "completed"
+                    },
+                    {
+                      "k": "triggering_actor",
+                      "v": {
+                        "t": 2,
+                        "d": [
+                          {
+                            "k": "avatar_url",
+                            "v": "https://avatars.githubusercontent.com/u/102653117?v=4"
+                          },
+                          {
+                            "k": "events_url",
+                            "v": "https://api.github.com/users/highalvin/events{/privacy}"
+                          },
+                          {
+                            "k": "followers_url",
+                            "v": "https://api.github.com/users/highalvin/followers"
+                          },
+                          {
+                            "k": "following_url",
+                            "v": "https://api.github.com/users/highalvin/following{/other_user}"
+                          },
+                          {
+                            "k": "gists_url",
+                            "v": "https://api.github.com/users/highalvin/gists{/gist_id}"
+                          },
+                          {
+                            "k": "gravatar_id",
+                            "v": ""
+                          },
+                          {
+                            "k": "html_url",
+                            "v": "https://github.com/highalvin"
+                          },
+                          {
+                            "k": "id",
+                            "v": 102653117.0
+                          },
+                          {
+                            "k": "login",
+                            "v": "highalvin"
+                          },
+                          {
+                            "k": "node_id",
+                            "v": "U_kgDOBh5cvQ"
+                          },
+                          {
+                            "k": "organizations_url",
+                            "v": "https://api.github.com/users/highalvin/orgs"
+                          },
+                          {
+                            "k": "received_events_url",
+                            "v": "https://api.github.com/users/highalvin/received_events"
+                          },
+                          {
+                            "k": "repos_url",
+                            "v": "https://api.github.com/users/highalvin/repos"
+                          },
+                          {
+                            "k": "site_admin",
+                            "v": false
+                          },
+                          {
+                            "k": "starred_url",
+                            "v": "https://api.github.com/users/highalvin/starred{/owner}{/repo}"
+                          },
+                          {
+                            "k": "subscriptions_url",
+                            "v": "https://api.github.com/users/highalvin/subscriptions"
+                          },
+                          {
+                            "k": "type",
+                            "v": "User"
+                          },
+                          {
+                            "k": "url",
+                            "v": "https://api.github.com/users/highalvin"
+                          },
+                          {
+                            "k": "user_view_type",
+                            "v": "public"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "k": "updated_at",
+                      "v": "2026-04-06T12:38:32Z"
+                    },
+                    {
+                      "k": "url",
+                      "v": "https://api.github.com/repos/highalvin/opensource_hw_Devops/actions/runs/24032090671"
+                    },
+                    {
+                      "k": "workflow_id",
+                      "v": 256809325.0
+                    },
+                    {
+                      "k": "workflow_url",
+                      "v": "https://api.github.com/repos/highalvin/opensource_hw_Devops/actions/workflows/256809325"
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "k": "workflow_ref",
+          "v": "highalvin/opensource_hw_Devops/.github/workflows/deploy.yml@refs/heads/main"
+        },
+        {
+          "k": "workflow_sha",
+          "v": "953bc4f890b5224c9e3185aca2edd2c2674fe69f"
+        },
+        {
+          "k": "repository_id",
+          "v": "1202517204"
+        },
+        {
+          "k": "triggering_actor",
+          "v": "highalvin"
+        }
+      ]
+    },
+    "inputs": {
+      "t": 2
+    },
+    "job": {
+      "t": 2,
+      "d": [
+        {
+          "k": "check_run_id",
+          "v": 70083029394.0
+        }
+      ]
+    },
+    "matrix": null,
+    "needs": {
+      "t": 2
+    },
+    "strategy": {
+      "t": 2,
+      "d": [
+        {
+          "k": "fail-fast",
+          "v": true
+        },
+        {
+          "k": "job-index",
+          "v": 0.0
+        },
+        {
+          "k": "job-total",
+          "v": 1.0
+        },
+        {
+          "k": "max-parallel",
+          "v": 1.0
+        }
+      ]
+    },
+    "vars": {
+      "t": 2
+    }
+  },
+  "billingOwnerId": "U_kgDOBh5cvQ"
+}
+[2026-04-06 12:39:28Z INFO JobRunner] Job ID 5ab6c62e-ac4a-5103-9686-ec31b74386e2
+[2026-04-06 12:39:28Z INFO ConfigurationStore] currentAssemblyLocation: C:\Users\leeky\OneDrive\바탕 화면\Hello_devOps_HW\actions-runner\bin\Runner.Worker.dll
+[2026-04-06 12:39:28Z INFO HostContext] Well known directory 'Bin': 'C:\Users\leeky\OneDrive\바탕 화면\Hello_devOps_HW\actions-runner\bin'
+[2026-04-06 12:39:28Z INFO ConfigurationStore] binPath: C:\Users\leeky\OneDrive\바탕 화면\Hello_devOps_HW\actions-runner\bin
+[2026-04-06 12:39:28Z INFO HostContext] Well known directory 'Bin': 'C:\Users\leeky\OneDrive\바탕 화면\Hello_devOps_HW\actions-runner\bin'
+[2026-04-06 12:39:28Z INFO HostContext] Well known directory 'Root': 'C:\Users\leeky\OneDrive\바탕 화면\Hello_devOps_HW\actions-runner'
+[2026-04-06 12:39:28Z INFO ConfigurationStore] RootFolder: C:\Users\leeky\OneDrive\바탕 화면\Hello_devOps_HW\actions-runner
+[2026-04-06 12:39:28Z INFO HostContext] Well known directory 'Bin': 'C:\Users\leeky\OneDrive\바탕 화면\Hello_devOps_HW\actions-runner\bin'
+[2026-04-06 12:39:28Z INFO HostContext] Well known directory 'Root': 'C:\Users\leeky\OneDrive\바탕 화면\Hello_devOps_HW\actions-runner'
+[2026-04-06 12:39:28Z INFO HostContext] Well known config file 'Runner': 'C:\Users\leeky\OneDrive\바탕 화면\Hello_devOps_HW\actions-runner\.runner'
+[2026-04-06 12:39:28Z INFO ConfigurationStore] ConfigFilePath: C:\Users\leeky\OneDrive\바탕 화면\Hello_devOps_HW\actions-runner\.runner
+[2026-04-06 12:39:28Z INFO HostContext] Well known directory 'Bin': 'C:\Users\leeky\OneDrive\바탕 화면\Hello_devOps_HW\actions-runner\bin'
+[2026-04-06 12:39:28Z INFO HostContext] Well known directory 'Root': 'C:\Users\leeky\OneDrive\바탕 화면\Hello_devOps_HW\actions-runner'
+[2026-04-06 12:39:28Z INFO HostContext] Well known config file 'MigratedRunner': 'C:\Users\leeky\OneDrive\바탕 화면\Hello_devOps_HW\actions-runner\.runner_migrated'
+[2026-04-06 12:39:28Z INFO ConfigurationStore] MigratedConfigFilePath: C:\Users\leeky\OneDrive\바탕 화면\Hello_devOps_HW\actions-runner\.runner_migrated
+[2026-04-06 12:39:28Z INFO HostContext] Well known directory 'Bin': 'C:\Users\leeky\OneDrive\바탕 화면\Hello_devOps_HW\actions-runner\bin'
+[2026-04-06 12:39:28Z INFO HostContext] Well known directory 'Root': 'C:\Users\leeky\OneDrive\바탕 화면\Hello_devOps_HW\actions-runner'
+[2026-04-06 12:39:28Z INFO HostContext] Well known config file 'Credentials': 'C:\Users\leeky\OneDrive\바탕 화면\Hello_devOps_HW\actions-runner\.credentials'
+[2026-04-06 12:39:28Z INFO ConfigurationStore] CredFilePath: C:\Users\leeky\OneDrive\바탕 화면\Hello_devOps_HW\actions-runner\.credentials
+[2026-04-06 12:39:28Z INFO HostContext] Well known directory 'Bin': 'C:\Users\leeky\OneDrive\바탕 화면\Hello_devOps_HW\actions-runner\bin'
+[2026-04-06 12:39:28Z INFO HostContext] Well known directory 'Root': 'C:\Users\leeky\OneDrive\바탕 화면\Hello_devOps_HW\actions-runner'
+[2026-04-06 12:39:28Z INFO HostContext] Well known config file 'MigratedCredentials': 'C:\Users\leeky\OneDrive\바탕 화면\Hello_devOps_HW\actions-runner\.credentials_migrated'
+[2026-04-06 12:39:28Z INFO ConfigurationStore] MigratedCredFilePath: C:\Users\leeky\OneDrive\바탕 화면\Hello_devOps_HW\actions-runner\.credentials_migrated
+[2026-04-06 12:39:28Z INFO HostContext] Well known directory 'Bin': 'C:\Users\leeky\OneDrive\바탕 화면\Hello_devOps_HW\actions-runner\bin'
+[2026-04-06 12:39:28Z INFO HostContext] Well known directory 'Root': 'C:\Users\leeky\OneDrive\바탕 화면\Hello_devOps_HW\actions-runner'
+[2026-04-06 12:39:28Z INFO HostContext] Well known config file 'Service': 'C:\Users\leeky\OneDrive\바탕 화면\Hello_devOps_HW\actions-runner\.service'
+[2026-04-06 12:39:28Z INFO ConfigurationStore] ServiceConfigFilePath: C:\Users\leeky\OneDrive\바탕 화면\Hello_devOps_HW\actions-runner\.service
+[2026-04-06 12:39:28Z INFO ConfigurationStore] Read setting file: 409 chars
+[2026-04-06 12:39:28Z INFO JobRunner] Initializing launch client
+[2026-04-06 12:39:28Z INFO JobServerQueue] Initializing results client
+[2026-04-06 12:39:28Z INFO ResultServer] Creating websocket client ...wss://results-receiver.actions.githubusercontent.com/_ws/ingest.sock
+[2026-04-06 12:39:28Z INFO ResultServer] Attempting to start websocket client with delay 00:00:00.
+[2026-04-06 12:39:28Z INFO JobServerQueue] Start process web console line queue.
+[2026-04-06 12:39:28Z INFO JobServerQueue] Start process file upload queue.
+[2026-04-06 12:39:28Z INFO JobServerQueue] Start results file upload queue.
+[2026-04-06 12:39:28Z INFO JobServerQueue] Starting results-based upload queue...
+[2026-04-06 12:39:28Z INFO JobServerQueue] Start process timeline update queue.
+[2026-04-06 12:39:28Z INFO ExecutionContext] Initializing Job context
+[2026-04-06 12:39:28Z INFO ExecutionContext] Initialize GitHub context
+[2026-04-06 12:39:28Z INFO ExecutionContext] Initialize Env context
+[2026-04-06 12:39:28Z INFO HostContext] Well known directory 'Bin': 'C:\Users\leeky\OneDrive\바탕 화면\Hello_devOps_HW\actions-runner\bin'
+[2026-04-06 12:39:28Z INFO HostContext] Well known directory 'Root': 'C:\Users\leeky\OneDrive\바탕 화면\Hello_devOps_HW\actions-runner'
+[2026-04-06 12:39:28Z INFO HostContext] Well known directory 'Diag': 'C:\Users\leeky\OneDrive\바탕 화면\Hello_devOps_HW\actions-runner\_diag'
+[2026-04-06 12:39:28Z INFO HostContext] Well known directory 'Bin': 'C:\Users\leeky\OneDrive\바탕 화면\Hello_devOps_HW\actions-runner\bin'
+[2026-04-06 12:39:28Z INFO HostContext] Well known directory 'Root': 'C:\Users\leeky\OneDrive\바탕 화면\Hello_devOps_HW\actions-runner'
+[2026-04-06 12:39:28Z INFO HostContext] Well known directory 'Diag': 'C:\Users\leeky\OneDrive\바탕 화면\Hello_devOps_HW\actions-runner\_diag'
+[2026-04-06 12:39:28Z INFO JobRunner] Starting the job execution context.
+[2026-04-06 12:39:28Z INFO HostContext] Well known directory 'Bin': 'C:\Users\leeky\OneDrive\바탕 화면\Hello_devOps_HW\actions-runner\bin'
+[2026-04-06 12:39:28Z INFO HostContext] Well known directory 'Root': 'C:\Users\leeky\OneDrive\바탕 화면\Hello_devOps_HW\actions-runner'
+[2026-04-06 12:39:28Z INFO HostContext] Well known directory 'Work': 'C:\Users\leeky\OneDrive\바탕 화면\Hello_devOps_HW\actions-runner\_work'
+[2026-04-06 12:39:28Z INFO JobRunner] Validating directory permissions for: 'C:\Users\leeky\OneDrive\바탕 화면\Hello_devOps_HW\actions-runner\_work'
+[2026-04-06 12:39:28Z INFO HostContext] Well known directory 'Bin': 'C:\Users\leeky\OneDrive\바탕 화면\Hello_devOps_HW\actions-runner\bin'
+[2026-04-06 12:39:28Z INFO HostContext] Well known directory 'Root': 'C:\Users\leeky\OneDrive\바탕 화면\Hello_devOps_HW\actions-runner'
+[2026-04-06 12:39:28Z INFO HostContext] Well known directory 'Work': 'C:\Users\leeky\OneDrive\바탕 화면\Hello_devOps_HW\actions-runner\_work'
+[2026-04-06 12:39:28Z INFO HostContext] Well known directory 'Tools': 'C:\Users\leeky\OneDrive\바탕 화면\Hello_devOps_HW\actions-runner\_work\_tool'
+[2026-04-06 12:39:28Z INFO HostContext] Well known directory 'Bin': 'C:\Users\leeky\OneDrive\바탕 화면\Hello_devOps_HW\actions-runner\bin'
+[2026-04-06 12:39:28Z INFO HostContext] Well known directory 'Root': 'C:\Users\leeky\OneDrive\바탕 화면\Hello_devOps_HW\actions-runner'
+[2026-04-06 12:39:28Z INFO HostContext] Well known directory 'Work': 'C:\Users\leeky\OneDrive\바탕 화면\Hello_devOps_HW\actions-runner\_work'
+[2026-04-06 12:39:28Z INFO HostContext] Well known directory 'Temp': 'C:\Users\leeky\OneDrive\바탕 화면\Hello_devOps_HW\actions-runner\_work\_temp'
+[2026-04-06 12:39:28Z INFO JobRunner] Getting job extension.
+[2026-04-06 12:39:28Z INFO JobRunner] Initialize job. Getting all job steps.
+[2026-04-06 12:39:28Z INFO HostContext] Well known directory 'Bin': 'C:\Users\leeky\OneDrive\바탕 화면\Hello_devOps_HW\actions-runner\bin'
+[2026-04-06 12:39:28Z INFO HostContext] Well known directory 'Root': 'C:\Users\leeky\OneDrive\바탕 화면\Hello_devOps_HW\actions-runner'
+[2026-04-06 12:39:28Z INFO HostContext] Well known directory 'Diag': 'C:\Users\leeky\OneDrive\바탕 화면\Hello_devOps_HW\actions-runner\_diag'
+[2026-04-06 12:39:28Z INFO HostContext] Well known directory 'Bin': 'C:\Users\leeky\OneDrive\바탕 화면\Hello_devOps_HW\actions-runner\bin'
+[2026-04-06 12:39:28Z INFO HostContext] Well known directory 'Root': 'C:\Users\leeky\OneDrive\바탕 화면\Hello_devOps_HW\actions-runner'
+[2026-04-06 12:39:28Z INFO HostContext] Well known directory 'Diag': 'C:\Users\leeky\OneDrive\바탕 화면\Hello_devOps_HW\actions-runner\_diag'
+[2026-04-06 12:39:28Z INFO HostContext] Well known directory 'Bin': 'C:\Users\leeky\OneDrive\바탕 화면\Hello_devOps_HW\actions-runner\bin'
+[2026-04-06 12:39:28Z INFO HostContext] Well known directory 'Root': 'C:\Users\leeky\OneDrive\바탕 화면\Hello_devOps_HW\actions-runner'
+[2026-04-06 12:39:28Z INFO HostContext] Well known config file 'Credentials': 'C:\Users\leeky\OneDrive\바탕 화면\Hello_devOps_HW\actions-runner\.credentials'
+[2026-04-06 12:39:28Z INFO HostContext] Well known directory 'Bin': 'C:\Users\leeky\OneDrive\바탕 화면\Hello_devOps_HW\actions-runner\bin'
+[2026-04-06 12:39:28Z INFO HostContext] Well known directory 'Root': 'C:\Users\leeky\OneDrive\바탕 화면\Hello_devOps_HW\actions-runner'
+[2026-04-06 12:39:28Z INFO HostContext] Well known config file 'SetupInfo': 'C:\Users\leeky\OneDrive\바탕 화면\Hello_devOps_HW\actions-runner\.setup_info'
+[2026-04-06 12:39:28Z INFO HostContext] Well known directory 'Bin': 'C:\Users\leeky\OneDrive\바탕 화면\Hello_devOps_HW\actions-runner\bin'
+[2026-04-06 12:39:28Z INFO HostContext] Well known directory 'Root': 'C:\Users\leeky\OneDrive\바탕 화면\Hello_devOps_HW\actions-runner'
+[2026-04-06 12:39:28Z INFO HostContext] Well known directory 'Work': 'C:\Users\leeky\OneDrive\바탕 화면\Hello_devOps_HW\actions-runner\_work'
+[2026-04-06 12:39:28Z INFO PipelineDirectoryManager] Loading tracking config if exists: C:\Users\leeky\OneDrive\바탕 화면\Hello_devOps_HW\actions-runner\_work\_PipelineMapping\highalvin/opensource_hw_Devops\PipelineFolder.json
+[2026-04-06 12:39:28Z INFO PipelineDirectoryManager] Updating job run properties.
+[2026-04-06 12:39:28Z INFO HostContext] Well known directory 'Bin': 'C:\Users\leeky\OneDrive\바탕 화면\Hello_devOps_HW\actions-runner\bin'
+[2026-04-06 12:39:28Z INFO HostContext] Well known directory 'Root': 'C:\Users\leeky\OneDrive\바탕 화면\Hello_devOps_HW\actions-runner'
+[2026-04-06 12:39:28Z INFO HostContext] Well known directory 'Work': 'C:\Users\leeky\OneDrive\바탕 화면\Hello_devOps_HW\actions-runner\_work'
+[2026-04-06 12:39:28Z INFO HostContext] Well known directory 'Bin': 'C:\Users\leeky\OneDrive\바탕 화면\Hello_devOps_HW\actions-runner\bin'
+[2026-04-06 12:39:28Z INFO HostContext] Well known directory 'Root': 'C:\Users\leeky\OneDrive\바탕 화면\Hello_devOps_HW\actions-runner'
+[2026-04-06 12:39:28Z INFO HostContext] Well known directory 'Work': 'C:\Users\leeky\OneDrive\바탕 화면\Hello_devOps_HW\actions-runner\_work'
+[2026-04-06 12:39:28Z INFO HostContext] Well known directory 'Bin': 'C:\Users\leeky\OneDrive\바탕 화면\Hello_devOps_HW\actions-runner\bin'
+[2026-04-06 12:39:28Z INFO HostContext] Well known directory 'Root': 'C:\Users\leeky\OneDrive\바탕 화면\Hello_devOps_HW\actions-runner'
+[2026-04-06 12:39:28Z INFO HostContext] Well known directory 'Work': 'C:\Users\leeky\OneDrive\바탕 화면\Hello_devOps_HW\actions-runner\_work'
+[2026-04-06 12:39:28Z INFO JobExtension] Downloading actions
+[2026-04-06 12:39:28Z INFO HostContext] Well known directory 'Bin': 'C:\Users\leeky\OneDrive\바탕 화면\Hello_devOps_HW\actions-runner\bin'
+[2026-04-06 12:39:28Z INFO HostContext] Well known directory 'Root': 'C:\Users\leeky\OneDrive\바탕 화면\Hello_devOps_HW\actions-runner'
+[2026-04-06 12:39:28Z INFO HostContext] Well known directory 'Work': 'C:\Users\leeky\OneDrive\바탕 화면\Hello_devOps_HW\actions-runner\_work'
+[2026-04-06 12:39:28Z INFO HostContext] Well known directory 'Actions': 'C:\Users\leeky\OneDrive\바탕 화면\Hello_devOps_HW\actions-runner\_work\_actions'
+[2026-04-06 12:39:28Z INFO JobExtension] Adding .
+[2026-04-06 12:39:28Z INFO JobExtension] Adding .
+[2026-04-06 12:39:28Z INFO JobExtension] Adding .
+[2026-04-06 12:39:28Z INFO JobExtension] Adding .
+[2026-04-06 12:39:28Z INFO HostContext] Well known directory 'Bin': 'C:\Users\leeky\OneDrive\바탕 화면\Hello_devOps_HW\actions-runner\bin'
+[2026-04-06 12:39:28Z INFO HostContext] Well known directory 'Root': 'C:\Users\leeky\OneDrive\바탕 화면\Hello_devOps_HW\actions-runner'
+[2026-04-06 12:39:28Z INFO HostContext] Well known directory 'Diag': 'C:\Users\leeky\OneDrive\바탕 화면\Hello_devOps_HW\actions-runner\_diag'
+[2026-04-06 12:39:28Z INFO HostContext] Well known directory 'Bin': 'C:\Users\leeky\OneDrive\바탕 화면\Hello_devOps_HW\actions-runner\bin'
+[2026-04-06 12:39:28Z INFO HostContext] Well known directory 'Root': 'C:\Users\leeky\OneDrive\바탕 화면\Hello_devOps_HW\actions-runner'
+[2026-04-06 12:39:28Z INFO HostContext] Well known directory 'Diag': 'C:\Users\leeky\OneDrive\바탕 화면\Hello_devOps_HW\actions-runner\_diag'
+[2026-04-06 12:39:28Z INFO HostContext] Well known directory 'Bin': 'C:\Users\leeky\OneDrive\바탕 화면\Hello_devOps_HW\actions-runner\bin'
+[2026-04-06 12:39:28Z INFO HostContext] Well known directory 'Root': 'C:\Users\leeky\OneDrive\바탕 화면\Hello_devOps_HW\actions-runner'
+[2026-04-06 12:39:28Z INFO HostContext] Well known directory 'Diag': 'C:\Users\leeky\OneDrive\바탕 화면\Hello_devOps_HW\actions-runner\_diag'
+[2026-04-06 12:39:28Z INFO HostContext] Well known directory 'Bin': 'C:\Users\leeky\OneDrive\바탕 화면\Hello_devOps_HW\actions-runner\bin'
+[2026-04-06 12:39:28Z INFO HostContext] Well known directory 'Root': 'C:\Users\leeky\OneDrive\바탕 화면\Hello_devOps_HW\actions-runner'
+[2026-04-06 12:39:28Z INFO HostContext] Well known directory 'Diag': 'C:\Users\leeky\OneDrive\바탕 화면\Hello_devOps_HW\actions-runner\_diag'
+[2026-04-06 12:39:28Z INFO HostContext] Well known directory 'Bin': 'C:\Users\leeky\OneDrive\바탕 화면\Hello_devOps_HW\actions-runner\bin'
+[2026-04-06 12:39:28Z INFO HostContext] Well known directory 'Root': 'C:\Users\leeky\OneDrive\바탕 화면\Hello_devOps_HW\actions-runner'
+[2026-04-06 12:39:28Z INFO HostContext] Well known directory 'Diag': 'C:\Users\leeky\OneDrive\바탕 화면\Hello_devOps_HW\actions-runner\_diag'
+[2026-04-06 12:39:28Z INFO HostContext] Well known directory 'Bin': 'C:\Users\leeky\OneDrive\바탕 화면\Hello_devOps_HW\actions-runner\bin'
+[2026-04-06 12:39:28Z INFO HostContext] Well known directory 'Root': 'C:\Users\leeky\OneDrive\바탕 화면\Hello_devOps_HW\actions-runner'
+[2026-04-06 12:39:28Z INFO HostContext] Well known directory 'Diag': 'C:\Users\leeky\OneDrive\바탕 화면\Hello_devOps_HW\actions-runner\_diag'
+[2026-04-06 12:39:28Z INFO HostContext] Well known directory 'Bin': 'C:\Users\leeky\OneDrive\바탕 화면\Hello_devOps_HW\actions-runner\bin'
+[2026-04-06 12:39:28Z INFO HostContext] Well known directory 'Root': 'C:\Users\leeky\OneDrive\바탕 화면\Hello_devOps_HW\actions-runner'
+[2026-04-06 12:39:28Z INFO HostContext] Well known directory 'Diag': 'C:\Users\leeky\OneDrive\바탕 화면\Hello_devOps_HW\actions-runner\_diag'
+[2026-04-06 12:39:28Z INFO HostContext] Well known directory 'Bin': 'C:\Users\leeky\OneDrive\바탕 화면\Hello_devOps_HW\actions-runner\bin'
+[2026-04-06 12:39:28Z INFO HostContext] Well known directory 'Root': 'C:\Users\leeky\OneDrive\바탕 화면\Hello_devOps_HW\actions-runner'
+[2026-04-06 12:39:28Z INFO HostContext] Well known directory 'Diag': 'C:\Users\leeky\OneDrive\바탕 화면\Hello_devOps_HW\actions-runner\_diag'
+[2026-04-06 12:39:28Z INFO JobExtension] Total accessible running process: 328.
+[2026-04-06 12:39:28Z INFO HostContext] Well known directory 'Bin': 'C:\Users\leeky\OneDrive\바탕 화면\Hello_devOps_HW\actions-runner\bin'
+[2026-04-06 12:39:28Z INFO HostContext] Well known directory 'Root': 'C:\Users\leeky\OneDrive\바탕 화면\Hello_devOps_HW\actions-runner'
+[2026-04-06 12:39:28Z INFO HostContext] Well known directory 'Work': 'C:\Users\leeky\OneDrive\바탕 화면\Hello_devOps_HW\actions-runner\_work'
+[2026-04-06 12:39:28Z INFO JobExtension] Start checking server connectivity.
+[2026-04-06 12:39:28Z INFO JobExtension] Check server connectivity for https://broker.actions.githubusercontent.com/health.
+[2026-04-06 12:39:28Z INFO JobExtension] Check server connectivity for https://token.actions.githubusercontent.com/ready.
+[2026-04-06 12:39:28Z INFO JobExtension] Check server connectivity for https://run.actions.githubusercontent.com/health.
+[2026-04-06 12:39:28Z INFO JobExtension] Start checking service connectivity in background.
+[2026-04-06 12:39:28Z INFO ExecutionContext] Publish step telemetry for current step {
+  "action": "setup_job",
+  "type": "runner",
+  "stage": "Pre",
+  "stepId": "2536bb17-5570-49e5-a9d4-068a6d218e85",
+  "result": "succeeded",
+  "errorMessages": [],
+  "executionTimeInSeconds": 1,
+  "startTime": "2026-04-06T12:39:28.853392Z",
+  "finishTime": "2026-04-06T12:39:28.9472086Z"
+}.
+[2026-04-06 12:39:28Z INFO JobRunner] Total job steps: 4.
+[2026-04-06 12:39:28Z INFO JobRunner] Run all job steps.
+[2026-04-06 12:39:28Z INFO StepsRunner] Processing step: DisplayName='Pull Latest Docker Image'
+[2026-04-06 12:39:28Z INFO StepsRunner] Evaluating: success()
+[2026-04-06 12:39:28Z INFO StepsRunner] Result: true
+[2026-04-06 12:39:28Z INFO StepsRunner] Starting the step.
+[2026-04-06 12:39:28Z INFO HostContext] Well known directory 'Bin': 'C:\Users\leeky\OneDrive\바탕 화면\Hello_devOps_HW\actions-runner\bin'
+[2026-04-06 12:39:28Z INFO HostContext] Well known directory 'Root': 'C:\Users\leeky\OneDrive\바탕 화면\Hello_devOps_HW\actions-runner'
+[2026-04-06 12:39:28Z INFO HostContext] Well known directory 'Work': 'C:\Users\leeky\OneDrive\바탕 화면\Hello_devOps_HW\actions-runner\_work'
+[2026-04-06 12:39:28Z INFO StepsRunner] Which2: 'chcp'
+[2026-04-06 12:39:28Z INFO StepsRunner] Location: 'C:\Windows\system32\chcp.COM'
+[2026-04-06 12:39:28Z INFO ProcessInvokerWrapper] Starting process:
+[2026-04-06 12:39:28Z INFO ProcessInvokerWrapper]   File name: 'C:\Windows\system32\chcp.COM'
+[2026-04-06 12:39:28Z INFO ProcessInvokerWrapper]   Arguments: '65001'
+[2026-04-06 12:39:28Z INFO ProcessInvokerWrapper]   Working directory: 'C:\Users\leeky\OneDrive\바탕 화면\Hello_devOps_HW\actions-runner\_work'
+[2026-04-06 12:39:28Z INFO ProcessInvokerWrapper]   Require exit code zero: 'False'
+[2026-04-06 12:39:28Z INFO ProcessInvokerWrapper]   Encoding web name:  ; code page: ''
+[2026-04-06 12:39:28Z INFO ProcessInvokerWrapper]   Force kill process on cancellation: 'False'
+[2026-04-06 12:39:28Z INFO ProcessInvokerWrapper]   Redirected STDIN: 'False'
+[2026-04-06 12:39:28Z INFO ProcessInvokerWrapper]   Persist current code page: 'True'
+[2026-04-06 12:39:28Z INFO ProcessInvokerWrapper]   Keep redirected STDIN open: 'False'
+[2026-04-06 12:39:28Z INFO ProcessInvokerWrapper]   High priority process: 'False'
+[2026-04-06 12:39:29Z INFO ProcessInvokerWrapper] Process started with process id 11188, waiting for process exit.
+[2026-04-06 12:39:29Z INFO Worker] Listening for cancel message from the channel.
+[2026-04-06 12:39:29Z INFO Worker] Waiting for the job to complete or for a cancel message from the channel.
+[2026-04-06 12:39:29Z INFO ProcessInvokerWrapper] STDOUT/STDERR stream read finished.
+[2026-04-06 12:39:29Z INFO ProcessInvokerWrapper] STDOUT/STDERR stream read finished.
+[2026-04-06 12:39:29Z INFO ProcessInvokerWrapper] Finished process 11188 with exit code 0, and elapsed time 00:00:00.0479434.
+[2026-04-06 12:39:29Z INFO StepsRunner] Successfully returned to code page 65001 (UTF8)
+[2026-04-06 12:39:29Z INFO HostContext] Well known directory 'Bin': 'C:\Users\leeky\OneDrive\바탕 화면\Hello_devOps_HW\actions-runner\bin'
+[2026-04-06 12:39:29Z INFO HostContext] Well known directory 'Root': 'C:\Users\leeky\OneDrive\바탕 화면\Hello_devOps_HW\actions-runner'
+[2026-04-06 12:39:29Z INFO HostContext] Well known directory 'Work': 'C:\Users\leeky\OneDrive\바탕 화면\Hello_devOps_HW\actions-runner\_work'
+[2026-04-06 12:39:29Z INFO HostContext] Well known directory 'Temp': 'C:\Users\leeky\OneDrive\바탕 화면\Hello_devOps_HW\actions-runner\_work\_temp'
+[2026-04-06 12:39:29Z INFO ExecutionContext] Write event payload to C:\Users\leeky\OneDrive\바탕 화면\Hello_devOps_HW\actions-runner\_work\_temp\_github_workflow\event.json
+[2026-04-06 12:39:29Z INFO HostContext] Well known directory 'Bin': 'C:\Users\leeky\OneDrive\바탕 화면\Hello_devOps_HW\actions-runner\bin'
+[2026-04-06 12:39:29Z INFO HostContext] Well known directory 'Root': 'C:\Users\leeky\OneDrive\바탕 화면\Hello_devOps_HW\actions-runner'
+[2026-04-06 12:39:29Z INFO HostContext] Well known directory 'Work': 'C:\Users\leeky\OneDrive\바탕 화면\Hello_devOps_HW\actions-runner\_work'
+[2026-04-06 12:39:29Z INFO HostContext] Well known directory 'Temp': 'C:\Users\leeky\OneDrive\바탕 화면\Hello_devOps_HW\actions-runner\_work\_temp'
+[2026-04-06 12:39:29Z INFO ExtensionManager] Getting extensions for interface: 'GitHub.Runner.Worker.IFileCommandExtension'
+[2026-04-06 12:39:29Z INFO ExtensionManager] Creating instance: GitHub.Runner.Worker.AddPathFileCommand, Runner.Worker
+[2026-04-06 12:39:29Z INFO ExtensionManager] Creating instance: GitHub.Runner.Worker.SetEnvFileCommand, Runner.Worker
+[2026-04-06 12:39:29Z INFO ExtensionManager] Creating instance: GitHub.Runner.Worker.CreateStepSummaryCommand, Runner.Worker
+[2026-04-06 12:39:29Z INFO ExtensionManager] Creating instance: GitHub.Runner.Worker.SaveStateFileCommand, Runner.Worker
+[2026-04-06 12:39:29Z INFO ExtensionManager] Creating instance: GitHub.Runner.Worker.SetOutputFileCommand, Runner.Worker
+[2026-04-06 12:39:29Z INFO ExtensionManager] Getting extensions for interface: 'GitHub.Runner.Worker.IActionCommandExtension'
+[2026-04-06 12:39:29Z INFO ExtensionManager] Creating instance: GitHub.Runner.Worker.InternalPluginSetRepoPathCommandExtension, Runner.Worker
+[2026-04-06 12:39:29Z INFO ExtensionManager] Creating instance: GitHub.Runner.Worker.SetEnvCommandExtension, Runner.Worker
+[2026-04-06 12:39:29Z INFO ExtensionManager] Creating instance: GitHub.Runner.Worker.SetOutputCommandExtension, Runner.Worker
+[2026-04-06 12:39:29Z INFO ExtensionManager] Creating instance: GitHub.Runner.Worker.SaveStateCommandExtension, Runner.Worker
+[2026-04-06 12:39:29Z INFO ExtensionManager] Creating instance: GitHub.Runner.Worker.AddPathCommandExtension, Runner.Worker
+[2026-04-06 12:39:29Z INFO ExtensionManager] Creating instance: GitHub.Runner.Worker.AddMaskCommandExtension, Runner.Worker
+[2026-04-06 12:39:29Z INFO ExtensionManager] Creating instance: GitHub.Runner.Worker.AddMatcherCommandExtension, Runner.Worker
+[2026-04-06 12:39:29Z INFO ExtensionManager] Creating instance: GitHub.Runner.Worker.RemoveMatcherCommandExtension, Runner.Worker
+[2026-04-06 12:39:29Z INFO ExtensionManager] Creating instance: GitHub.Runner.Worker.WarningCommandExtension, Runner.Worker
+[2026-04-06 12:39:29Z INFO ExtensionManager] Creating instance: GitHub.Runner.Worker.ErrorCommandExtension, Runner.Worker
+[2026-04-06 12:39:29Z INFO ExtensionManager] Creating instance: GitHub.Runner.Worker.NoticeCommandExtension, Runner.Worker
+[2026-04-06 12:39:29Z INFO ExtensionManager] Creating instance: GitHub.Runner.Worker.DebugCommandExtension, Runner.Worker
+[2026-04-06 12:39:29Z INFO ExtensionManager] Creating instance: GitHub.Runner.Worker.GroupCommandExtension, Runner.Worker
+[2026-04-06 12:39:29Z INFO ExtensionManager] Creating instance: GitHub.Runner.Worker.EndGroupCommandExtension, Runner.Worker
+[2026-04-06 12:39:29Z INFO ExtensionManager] Creating instance: GitHub.Runner.Worker.EchoCommandExtension, Runner.Worker
+[2026-04-06 12:39:29Z INFO ActionCommandManager] Register action command extension for command internal-set-repo-path
+[2026-04-06 12:39:29Z INFO ActionCommandManager] Register action command extension for command set-env
+[2026-04-06 12:39:29Z INFO ActionCommandManager] Register action command extension for command set-output
+[2026-04-06 12:39:29Z INFO ActionCommandManager] Register action command extension for command save-state
+[2026-04-06 12:39:29Z INFO ActionCommandManager] Register action command extension for command add-path
+[2026-04-06 12:39:29Z INFO ActionCommandManager] Register action command extension for command add-mask
+[2026-04-06 12:39:29Z INFO ActionCommandManager] Register action command extension for command add-matcher
+[2026-04-06 12:39:29Z INFO ActionCommandManager] Register action command extension for command remove-matcher
+[2026-04-06 12:39:29Z INFO ActionCommandManager] Register action command extension for command warning
+[2026-04-06 12:39:29Z INFO ActionCommandManager] Register action command extension for command error
+[2026-04-06 12:39:29Z INFO ActionCommandManager] Register action command extension for command notice
+[2026-04-06 12:39:29Z INFO ActionCommandManager] Register action command extension for command debug
+[2026-04-06 12:39:29Z INFO ActionCommandManager] Register action command extension for command group
+[2026-04-06 12:39:29Z INFO ActionCommandManager] Register action command extension for command endgroup
+[2026-04-06 12:39:29Z INFO ActionCommandManager] Register action command extension for command echo
+[2026-04-06 12:39:29Z INFO ScriptHandler] Which2: 'pwsh'
+[2026-04-06 12:39:29Z INFO ScriptHandler] pwsh: command not found. Make sure 'pwsh' is installed and its location included in the 'Path' environment variable.
+[2026-04-06 12:39:29Z INFO ScriptHandler] Defaulting to powershell
+[2026-04-06 12:39:29Z INFO ScriptHandler] Which2: 'powershell'
+[2026-04-06 12:39:29Z INFO ScriptHandler] Location: 'C:\Windows\System32\WindowsPowerShell\v1.0\powershell.EXE'
+[2026-04-06 12:39:29Z INFO HostContext] Well known directory 'Bin': 'C:\Users\leeky\OneDrive\바탕 화면\Hello_devOps_HW\actions-runner\bin'
+[2026-04-06 12:39:29Z INFO HostContext] Well known directory 'Root': 'C:\Users\leeky\OneDrive\바탕 화면\Hello_devOps_HW\actions-runner'
+[2026-04-06 12:39:29Z INFO HostContext] Well known directory 'Work': 'C:\Users\leeky\OneDrive\바탕 화면\Hello_devOps_HW\actions-runner\_work'
+[2026-04-06 12:39:29Z INFO HostContext] Well known directory 'Temp': 'C:\Users\leeky\OneDrive\바탕 화면\Hello_devOps_HW\actions-runner\_work\_temp'
+[2026-04-06 12:39:29Z INFO ScriptHandler] Which2: 'pwsh'
+[2026-04-06 12:39:29Z INFO ScriptHandler] pwsh: command not found. Make sure 'pwsh' is installed and its location included in the 'Path' environment variable.
+[2026-04-06 12:39:29Z INFO ScriptHandler] Defaulting to powershell
+[2026-04-06 12:39:29Z INFO ScriptHandler] Which2: 'powershell'
+[2026-04-06 12:39:29Z INFO ScriptHandler] Location: 'C:\Windows\System32\WindowsPowerShell\v1.0\powershell.EXE'
+[2026-04-06 12:39:29Z INFO ProcessInvokerWrapper] Starting process:
+[2026-04-06 12:39:29Z INFO ProcessInvokerWrapper]   File name: 'C:\Windows\System32\WindowsPowerShell\v1.0\powershell.EXE'
+[2026-04-06 12:39:29Z INFO ProcessInvokerWrapper]   Arguments: '-command ". 'C:\Users\leeky\OneDrive\바탕 화면\Hello_devOps_HW\actions-runner\_work\_temp\fbc8d689-a874-4ced-8f8b-4ea67b7109bc.ps1'"'
+[2026-04-06 12:39:29Z INFO ProcessInvokerWrapper]   Working directory: 'C:\Users\leeky\OneDrive\바탕 화면\Hello_devOps_HW\actions-runner\_work\opensource_hw_Devops\opensource_hw_Devops'
+[2026-04-06 12:39:29Z INFO ProcessInvokerWrapper]   Require exit code zero: 'False'
+[2026-04-06 12:39:29Z INFO ProcessInvokerWrapper]   Encoding web name:  ; code page: ''
+[2026-04-06 12:39:29Z INFO ProcessInvokerWrapper]   Force kill process on cancellation: 'False'
+[2026-04-06 12:39:29Z INFO ProcessInvokerWrapper]   Redirected STDIN: 'False'
+[2026-04-06 12:39:29Z INFO ProcessInvokerWrapper]   Persist current code page: 'True'
+[2026-04-06 12:39:29Z INFO ProcessInvokerWrapper]   Keep redirected STDIN open: 'False'
+[2026-04-06 12:39:29Z INFO ProcessInvokerWrapper]   High priority process: 'False'
+[2026-04-06 12:39:29Z INFO ProcessInvokerWrapper] Process started with process id 9080, waiting for process exit.
+[2026-04-06 12:39:29Z INFO ResultServer] Successfully started websocket client.
+[2026-04-06 12:39:29Z INFO JobServerQueue] Try to append 1 batches web console lines for record '2536bb17-5570-49e5-a9d4-068a6d218e85', success rate: 1/1.
+[2026-04-06 12:39:29Z INFO JobServerQueue] Try to append 1 batches web console lines for record '454d7c3b-42bb-4ab3-a652-a5023286e1a1', success rate: 1/1.
+[2026-04-06 12:39:29Z INFO JobServerQueue] Got a step log file to send to results service.
+[2026-04-06 12:39:29Z INFO JobServerQueue] Starting upload of step log file to results service ResultsLog, C:\Users\leeky\OneDrive\바탕 화면\Hello_devOps_HW\actions-runner\_diag\blocks\17395d82-a8d6-437b-b229-30b29c4481ef_2536bb17-5570-49e5-a9d4-068a6d218e85.1
+[2026-04-06 12:39:29Z INFO JobServerQueue] Try to upload 1 log files or attachments, success rate: 1/1.
+[2026-04-06 12:39:30Z INFO JobServerQueue] Job timeline record has been updated for the first time.
+[2026-04-06 12:39:31Z INFO JobServerQueue] Tried to upload 1 file(s) to results, success rate: 1/1.
+[2026-04-06 12:39:36Z INFO JobServerQueue] Try to append 1 batches web console lines for record '454d7c3b-42bb-4ab3-a652-a5023286e1a1', success rate: 1/1.
+[2026-04-06 12:39:37Z INFO ProcessInvokerWrapper] STDOUT/STDERR stream read finished.
+[2026-04-06 12:39:37Z INFO ProcessInvokerWrapper] STDOUT/STDERR stream read finished.
+[2026-04-06 12:39:37Z INFO ProcessInvokerWrapper] Finished process 9080 with exit code 0, and elapsed time 00:00:07.9612318.
+[2026-04-06 12:39:37Z INFO CreateStepSummaryCommand] Step Summary file (C:\Users\leeky\OneDrive\바탕 화면\Hello_devOps_HW\actions-runner\_work\_temp\_runner_file_commands\step_summary_fc8aaa0b-e19e-476a-8008-53265f254259) is empty; skipping attachment upload
+[2026-04-06 12:39:37Z INFO StepsRunner] Step result: 
+[2026-04-06 12:39:37Z INFO ExecutionContext] Publish step telemetry for current step {
+  "action": "powershell",
+  "type": "run",
+  "stage": "Main",
+  "stepId": "454d7c3b-42bb-4ab3-a652-a5023286e1a1",
+  "stepContextName": "__run",
+  "result": "succeeded",
+  "errorMessages": [],
+  "executionTimeInSeconds": 9,
+  "startTime": "2026-04-06T12:39:28.9591793Z",
+  "finishTime": "2026-04-06T12:39:37.0869378Z"
+}.
+[2026-04-06 12:39:37Z INFO StepsRunner] No need for updating job result with current step result 'Succeeded'.
+[2026-04-06 12:39:37Z INFO StepsRunner] Current state: job state = ''
+[2026-04-06 12:39:37Z INFO StepsRunner] Processing step: DisplayName='Stop and Remove Existing Container'
+[2026-04-06 12:39:37Z INFO StepsRunner] Evaluating: success()
+[2026-04-06 12:39:37Z INFO StepsRunner] Result: true
+[2026-04-06 12:39:37Z INFO StepsRunner] Starting the step.
+[2026-04-06 12:39:37Z INFO HostContext] Well known directory 'Bin': 'C:\Users\leeky\OneDrive\바탕 화면\Hello_devOps_HW\actions-runner\bin'
+[2026-04-06 12:39:37Z INFO HostContext] Well known directory 'Root': 'C:\Users\leeky\OneDrive\바탕 화면\Hello_devOps_HW\actions-runner'
+[2026-04-06 12:39:37Z INFO HostContext] Well known directory 'Work': 'C:\Users\leeky\OneDrive\바탕 화면\Hello_devOps_HW\actions-runner\_work'
+[2026-04-06 12:39:37Z INFO StepsRunner] Which2: 'chcp'
+[2026-04-06 12:39:37Z INFO StepsRunner] Location: 'C:\Windows\system32\chcp.COM'
+[2026-04-06 12:39:37Z INFO ProcessInvokerWrapper] Starting process:
+[2026-04-06 12:39:37Z INFO ProcessInvokerWrapper]   File name: 'C:\Windows\system32\chcp.COM'
+[2026-04-06 12:39:37Z INFO ProcessInvokerWrapper]   Arguments: '65001'
+[2026-04-06 12:39:37Z INFO ProcessInvokerWrapper]   Working directory: 'C:\Users\leeky\OneDrive\바탕 화면\Hello_devOps_HW\actions-runner\_work'
+[2026-04-06 12:39:37Z INFO ProcessInvokerWrapper]   Require exit code zero: 'False'
+[2026-04-06 12:39:37Z INFO ProcessInvokerWrapper]   Encoding web name:  ; code page: ''
+[2026-04-06 12:39:37Z INFO ProcessInvokerWrapper]   Force kill process on cancellation: 'False'
+[2026-04-06 12:39:37Z INFO ProcessInvokerWrapper]   Redirected STDIN: 'False'
+[2026-04-06 12:39:37Z INFO ProcessInvokerWrapper]   Persist current code page: 'True'
+[2026-04-06 12:39:37Z INFO ProcessInvokerWrapper]   Keep redirected STDIN open: 'False'
+[2026-04-06 12:39:37Z INFO ProcessInvokerWrapper]   High priority process: 'False'
+[2026-04-06 12:39:37Z INFO ProcessInvokerWrapper] Process started with process id 6324, waiting for process exit.
+[2026-04-06 12:39:37Z INFO ProcessInvokerWrapper] STDOUT/STDERR stream read finished.
+[2026-04-06 12:39:37Z INFO ProcessInvokerWrapper] STDOUT/STDERR stream read finished.
+[2026-04-06 12:39:37Z INFO ProcessInvokerWrapper] Finished process 6324 with exit code 0, and elapsed time 00:00:00.0177758.
+[2026-04-06 12:39:37Z INFO StepsRunner] Successfully returned to code page 65001 (UTF8)
+[2026-04-06 12:39:37Z INFO HostContext] Well known directory 'Bin': 'C:\Users\leeky\OneDrive\바탕 화면\Hello_devOps_HW\actions-runner\bin'
+[2026-04-06 12:39:37Z INFO HostContext] Well known directory 'Root': 'C:\Users\leeky\OneDrive\바탕 화면\Hello_devOps_HW\actions-runner'
+[2026-04-06 12:39:37Z INFO HostContext] Well known directory 'Work': 'C:\Users\leeky\OneDrive\바탕 화면\Hello_devOps_HW\actions-runner\_work'
+[2026-04-06 12:39:37Z INFO HostContext] Well known directory 'Temp': 'C:\Users\leeky\OneDrive\바탕 화면\Hello_devOps_HW\actions-runner\_work\_temp'
+[2026-04-06 12:39:37Z INFO ExecutionContext] Write event payload to C:\Users\leeky\OneDrive\바탕 화면\Hello_devOps_HW\actions-runner\_work\_temp\_github_workflow\event.json
+[2026-04-06 12:39:37Z INFO HostContext] Well known directory 'Bin': 'C:\Users\leeky\OneDrive\바탕 화면\Hello_devOps_HW\actions-runner\bin'
+[2026-04-06 12:39:37Z INFO HostContext] Well known directory 'Root': 'C:\Users\leeky\OneDrive\바탕 화면\Hello_devOps_HW\actions-runner'
+[2026-04-06 12:39:37Z INFO HostContext] Well known directory 'Work': 'C:\Users\leeky\OneDrive\바탕 화면\Hello_devOps_HW\actions-runner\_work'
+[2026-04-06 12:39:37Z INFO HostContext] Well known directory 'Temp': 'C:\Users\leeky\OneDrive\바탕 화면\Hello_devOps_HW\actions-runner\_work\_temp'
+[2026-04-06 12:39:37Z INFO ExtensionManager] Getting extensions for interface: 'GitHub.Runner.Worker.IFileCommandExtension'
+[2026-04-06 12:39:37Z INFO ExtensionManager] Getting extensions for interface: 'GitHub.Runner.Worker.IActionCommandExtension'
+[2026-04-06 12:39:37Z INFO ActionCommandManager] Register action command extension for command internal-set-repo-path
+[2026-04-06 12:39:37Z INFO ActionCommandManager] Register action command extension for command set-env
+[2026-04-06 12:39:37Z INFO ActionCommandManager] Register action command extension for command set-output
+[2026-04-06 12:39:37Z INFO ActionCommandManager] Register action command extension for command save-state
+[2026-04-06 12:39:37Z INFO ActionCommandManager] Register action command extension for command add-path
+[2026-04-06 12:39:37Z INFO ActionCommandManager] Register action command extension for command add-mask
+[2026-04-06 12:39:37Z INFO ActionCommandManager] Register action command extension for command add-matcher
+[2026-04-06 12:39:37Z INFO ActionCommandManager] Register action command extension for command remove-matcher
+[2026-04-06 12:39:37Z INFO ActionCommandManager] Register action command extension for command warning
+[2026-04-06 12:39:37Z INFO ActionCommandManager] Register action command extension for command error
+[2026-04-06 12:39:37Z INFO ActionCommandManager] Register action command extension for command notice
+[2026-04-06 12:39:37Z INFO ActionCommandManager] Register action command extension for command debug
+[2026-04-06 12:39:37Z INFO ActionCommandManager] Register action command extension for command group
+[2026-04-06 12:39:37Z INFO ActionCommandManager] Register action command extension for command endgroup
+[2026-04-06 12:39:37Z INFO ActionCommandManager] Register action command extension for command echo
+[2026-04-06 12:39:37Z INFO ScriptHandler] Which2: 'pwsh'
+[2026-04-06 12:39:37Z INFO ScriptHandler] pwsh: command not found. Make sure 'pwsh' is installed and its location included in the 'Path' environment variable.
+[2026-04-06 12:39:37Z INFO ScriptHandler] Defaulting to powershell
+[2026-04-06 12:39:37Z INFO ScriptHandler] Which2: 'powershell'
+[2026-04-06 12:39:37Z INFO ScriptHandler] Location: 'C:\Windows\System32\WindowsPowerShell\v1.0\powershell.EXE'
+[2026-04-06 12:39:37Z INFO HostContext] Well known directory 'Bin': 'C:\Users\leeky\OneDrive\바탕 화면\Hello_devOps_HW\actions-runner\bin'
+[2026-04-06 12:39:37Z INFO HostContext] Well known directory 'Root': 'C:\Users\leeky\OneDrive\바탕 화면\Hello_devOps_HW\actions-runner'
+[2026-04-06 12:39:37Z INFO HostContext] Well known directory 'Work': 'C:\Users\leeky\OneDrive\바탕 화면\Hello_devOps_HW\actions-runner\_work'
+[2026-04-06 12:39:37Z INFO HostContext] Well known directory 'Temp': 'C:\Users\leeky\OneDrive\바탕 화면\Hello_devOps_HW\actions-runner\_work\_temp'
+[2026-04-06 12:39:37Z INFO ScriptHandler] Which2: 'pwsh'
+[2026-04-06 12:39:37Z INFO ScriptHandler] pwsh: command not found. Make sure 'pwsh' is installed and its location included in the 'Path' environment variable.
+[2026-04-06 12:39:37Z INFO ScriptHandler] Defaulting to powershell
+[2026-04-06 12:39:37Z INFO ScriptHandler] Which2: 'powershell'
+[2026-04-06 12:39:37Z INFO ScriptHandler] Location: 'C:\Windows\System32\WindowsPowerShell\v1.0\powershell.EXE'
+[2026-04-06 12:39:37Z INFO ProcessInvokerWrapper] Starting process:
+[2026-04-06 12:39:37Z INFO ProcessInvokerWrapper]   File name: 'C:\Windows\System32\WindowsPowerShell\v1.0\powershell.EXE'
+[2026-04-06 12:39:37Z INFO ProcessInvokerWrapper]   Arguments: '-command ". 'C:\Users\leeky\OneDrive\바탕 화면\Hello_devOps_HW\actions-runner\_work\_temp\2840876f-5857-4da8-82c5-e4f2e4b17088.ps1'"'
+[2026-04-06 12:39:37Z INFO ProcessInvokerWrapper]   Working directory: 'C:\Users\leeky\OneDrive\바탕 화면\Hello_devOps_HW\actions-runner\_work\opensource_hw_Devops\opensource_hw_Devops'
+[2026-04-06 12:39:37Z INFO ProcessInvokerWrapper]   Require exit code zero: 'False'
+[2026-04-06 12:39:37Z INFO ProcessInvokerWrapper]   Encoding web name:  ; code page: ''
+[2026-04-06 12:39:37Z INFO ProcessInvokerWrapper]   Force kill process on cancellation: 'False'
+[2026-04-06 12:39:37Z INFO ProcessInvokerWrapper]   Redirected STDIN: 'False'
+[2026-04-06 12:39:37Z INFO ProcessInvokerWrapper]   Persist current code page: 'True'
+[2026-04-06 12:39:37Z INFO ProcessInvokerWrapper]   Keep redirected STDIN open: 'False'
+[2026-04-06 12:39:37Z INFO ProcessInvokerWrapper]   High priority process: 'False'
+[2026-04-06 12:39:37Z INFO JobServerQueue] Try to append 1 batches web console lines for record '454d7c3b-42bb-4ab3-a652-a5023286e1a1', success rate: 1/1.
+[2026-04-06 12:39:37Z INFO JobServerQueue] Try to append 1 batches web console lines for record '3dd34ae2-c82a-46d9-bd67-21d9079d10c5', success rate: 1/1.
+[2026-04-06 12:39:37Z INFO ProcessInvokerWrapper] Process started with process id 20968, waiting for process exit.
+[2026-04-06 12:39:37Z INFO JobServerQueue] Got a step log file to send to results service.
+[2026-04-06 12:39:37Z INFO JobServerQueue] Starting upload of step log file to results service ResultsLog, C:\Users\leeky\OneDrive\바탕 화면\Hello_devOps_HW\actions-runner\_diag\blocks\17395d82-a8d6-437b-b229-30b29c4481ef_454d7c3b-42bb-4ab3-a652-a5023286e1a1.1
+[2026-04-06 12:39:37Z INFO JobServerQueue] Try to upload 1 log files or attachments, success rate: 1/1.
+[2026-04-06 12:39:38Z INFO JobServerQueue] Tried to upload 1 file(s) to results, success rate: 1/1.
+[2026-04-06 12:39:38Z INFO HostContext] Well known directory 'Bin': 'C:\Users\leeky\OneDrive\바탕 화면\Hello_devOps_HW\actions-runner\bin'
+[2026-04-06 12:39:38Z INFO HostContext] Well known directory 'Root': 'C:\Users\leeky\OneDrive\바탕 화면\Hello_devOps_HW\actions-runner'
+[2026-04-06 12:39:38Z INFO HostContext] Well known directory 'Work': 'C:\Users\leeky\OneDrive\바탕 화면\Hello_devOps_HW\actions-runner\_work'
+[2026-04-06 12:39:44Z INFO ProcessInvokerWrapper] STDOUT/STDERR stream read finished.
+[2026-04-06 12:39:44Z INFO ProcessInvokerWrapper] STDOUT/STDERR stream read finished.
+[2026-04-06 12:39:44Z INFO ProcessInvokerWrapper] Finished process 20968 with exit code 1, and elapsed time 00:00:07.6470476.
+[2026-04-06 12:39:44Z INFO CreateStepSummaryCommand] Step Summary file (C:\Users\leeky\OneDrive\바탕 화면\Hello_devOps_HW\actions-runner\_work\_temp\_runner_file_commands\step_summary_5563f933-3497-4988-8371-b0fecdceb1bd) is empty; skipping attachment upload
+[2026-04-06 12:39:44Z INFO StepsRunner] Step result: Failed
+[2026-04-06 12:39:44Z INFO ExecutionContext] Publish step telemetry for current step {
+  "action": "powershell",
+  "type": "run",
+  "stage": "Main",
+  "stepId": "3dd34ae2-c82a-46d9-bd67-21d9079d10c5",
+  "stepContextName": "__run_2",
+  "result": "failed",
+  "errorMessages": [
+    "Process completed with exit code 1."
+  ],
+  "executionTimeInSeconds": 8,
+  "startTime": "2026-04-06T12:39:37.0938286Z",
+  "finishTime": "2026-04-06T12:39:44.8352986Z"
+}.
+[2026-04-06 12:39:44Z INFO StepsRunner] Update job result with current step result 'Failed'.
+[2026-04-06 12:39:44Z INFO StepsRunner] Current state: job state = 'Failed'
+[2026-04-06 12:39:44Z INFO StepsRunner] Processing step: DisplayName='Run New Container'
+[2026-04-06 12:39:44Z INFO StepsRunner] Evaluating: success()
+[2026-04-06 12:39:44Z INFO StepsRunner] Result: false
+[2026-04-06 12:39:44Z INFO StepsRunner] Skipping step due to condition evaluation.
+[2026-04-06 12:39:44Z INFO StepsRunner] No need for updating job result with current step result 'Skipped'.
+[2026-04-06 12:39:44Z INFO StepsRunner] Current state: job state = 'Failed'
+[2026-04-06 12:39:44Z INFO StepsRunner] Processing step: DisplayName='Clean Up Unused Docker Images'
+[2026-04-06 12:39:44Z INFO StepsRunner] Evaluating: success()
+[2026-04-06 12:39:44Z INFO StepsRunner] Result: false
+[2026-04-06 12:39:44Z INFO StepsRunner] Skipping step due to condition evaluation.
+[2026-04-06 12:39:44Z INFO StepsRunner] No need for updating job result with current step result 'Skipped'.
+[2026-04-06 12:39:44Z INFO StepsRunner] Current state: job state = 'Failed'
+[2026-04-06 12:39:44Z INFO JobRunner] Finalize job.
+[2026-04-06 12:39:44Z INFO HostContext] Well known directory 'Bin': 'C:\Users\leeky\OneDrive\바탕 화면\Hello_devOps_HW\actions-runner\bin'
+[2026-04-06 12:39:44Z INFO HostContext] Well known directory 'Root': 'C:\Users\leeky\OneDrive\바탕 화면\Hello_devOps_HW\actions-runner'
+[2026-04-06 12:39:44Z INFO HostContext] Well known directory 'Diag': 'C:\Users\leeky\OneDrive\바탕 화면\Hello_devOps_HW\actions-runner\_diag'
+[2026-04-06 12:39:44Z INFO HostContext] Well known directory 'Bin': 'C:\Users\leeky\OneDrive\바탕 화면\Hello_devOps_HW\actions-runner\bin'
+[2026-04-06 12:39:44Z INFO HostContext] Well known directory 'Root': 'C:\Users\leeky\OneDrive\바탕 화면\Hello_devOps_HW\actions-runner'
+[2026-04-06 12:39:44Z INFO HostContext] Well known directory 'Diag': 'C:\Users\leeky\OneDrive\바탕 화면\Hello_devOps_HW\actions-runner\_diag'
+[2026-04-06 12:39:44Z INFO JobExtension] Initialize Env context
+[2026-04-06 12:39:44Z INFO JobExtension] Initialize steps context
+[2026-04-06 12:39:44Z INFO JobExtension] Total accessible running process: 328.
+[2026-04-06 12:39:44Z INFO JobExtension] Wait for all connectivity checks to finish.
+[2026-04-06 12:39:44Z INFO JobExtension] Connectivity check result: GitHub.Runner.Worker.JobExtension+CheckResult
+[2026-04-06 12:39:44Z INFO JobExtension] Connectivity check result: GitHub.Runner.Worker.JobExtension+CheckResult
+[2026-04-06 12:39:44Z INFO JobExtension] Connectivity check result: GitHub.Runner.Worker.JobExtension+CheckResult
+[2026-04-06 12:39:44Z INFO ExecutionContext] Publish step telemetry for current step {
+  "action": "complete_job",
+  "type": "runner",
+  "stage": "Post",
+  "stepId": "4e3415cc-e82f-4a5b-ac69-f9d593f92791",
+  "result": "succeeded",
+  "errorMessages": [],
+  "executionTimeInSeconds": 1,
+  "startTime": "2026-04-06T12:39:44.8531155Z",
+  "finishTime": "2026-04-06T12:39:44.8716754Z"
+}.
+[2026-04-06 12:39:44Z INFO JobRunner] Job result after all job steps finish: Failed
+[2026-04-06 12:39:44Z INFO JobRunner] Completing the job execution context.
+[2026-04-06 12:39:44Z INFO JobRunner] Shutting down the job server queue.
+[2026-04-06 12:39:44Z INFO JobServerQueue] Fire signal to shutdown all queues.
+[2026-04-06 12:39:45Z INFO JobServerQueue] All queue process task stopped.
+[2026-04-06 12:39:45Z INFO JobServerQueue] Try to append 1 batches web console lines for record '3dd34ae2-c82a-46d9-bd67-21d9079d10c5', success rate: 1/1.
+[2026-04-06 12:39:45Z INFO JobServerQueue] Try to append 1 batches web console lines for record '4e3415cc-e82f-4a5b-ac69-f9d593f92791', success rate: 1/1.
+[2026-04-06 12:39:45Z INFO JobServerQueue] Web console line queue drained.
+[2026-04-06 12:39:45Z INFO JobServerQueue] Uploading 3 files in one shot.
+[2026-04-06 12:39:45Z INFO JobServerQueue] Try to upload 3 log files or attachments, success rate: 3/3.
+[2026-04-06 12:39:45Z INFO JobServerQueue] File upload queue drained.
+[2026-04-06 12:39:45Z INFO JobServerQueue] Starting results-based upload queue...
+[2026-04-06 12:39:45Z INFO JobServerQueue] Uploading 3 file(s) in one shot through results service.
+[2026-04-06 12:39:45Z INFO JobServerQueue] Got a step log file to send to results service.
+[2026-04-06 12:39:45Z INFO JobServerQueue] Starting upload of step log file to results service ResultsLog, C:\Users\leeky\OneDrive\바탕 화면\Hello_devOps_HW\actions-runner\_diag\blocks\17395d82-a8d6-437b-b229-30b29c4481ef_3dd34ae2-c82a-46d9-bd67-21d9079d10c5.1
+[2026-04-06 12:39:46Z INFO JobServerQueue] Got a step log file to send to results service.
+[2026-04-06 12:39:46Z INFO JobServerQueue] Starting upload of step log file to results service ResultsLog, C:\Users\leeky\OneDrive\바탕 화면\Hello_devOps_HW\actions-runner\_diag\blocks\17395d82-a8d6-437b-b229-30b29c4481ef_4e3415cc-e82f-4a5b-ac69-f9d593f92791.1
+[2026-04-06 12:39:46Z INFO JobServerQueue] Got a job log file to send to results service.
+[2026-04-06 12:39:46Z INFO JobServerQueue] Starting upload of job log file to results service ResultsLog, C:\Users\leeky\OneDrive\바탕 화면\Hello_devOps_HW\actions-runner\_diag\blocks\17395d82-a8d6-437b-b229-30b29c4481ef_5ab6c62e-ac4a-5103-9686-ec31b74386e2.1
+[2026-04-06 12:39:47Z INFO JobServerQueue] Tried to upload 3 file(s) to results, success rate: 3/3.
+[2026-04-06 12:39:47Z INFO JobServerQueue] Results upload queue drained.
+[2026-04-06 12:39:47Z INFO JobServerQueue] Timeline update queue drained.
+[2026-04-06 12:39:47Z INFO JobServerQueue] Disposing job server ...
+[2026-04-06 12:39:47Z INFO JobServerQueue] Disposing results server ...
+[2026-04-06 12:39:47Z INFO JobServerQueue] All queue process tasks have been stopped, and all queues are drained.
+[2026-04-06 12:39:47Z INFO TempDirectoryManager] Cleaning runner temp folder: C:\Users\leeky\OneDrive\바탕 화면\Hello_devOps_HW\actions-runner\_work\_temp
+[2026-04-06 12:39:47Z INFO HostContext] Well known directory 'Bin': 'C:\Users\leeky\OneDrive\바탕 화면\Hello_devOps_HW\actions-runner\bin'
+[2026-04-06 12:39:47Z INFO HostContext] Well known directory 'Root': 'C:\Users\leeky\OneDrive\바탕 화면\Hello_devOps_HW\actions-runner'
+[2026-04-06 12:39:47Z INFO HostContext] Well known directory 'Diag': 'C:\Users\leeky\OneDrive\바탕 화면\Hello_devOps_HW\actions-runner\_diag'
+[2026-04-06 12:39:47Z INFO HostContext] Well known config file 'Telemetry': 'C:\Users\leeky\OneDrive\바탕 화면\Hello_devOps_HW\actions-runner\_diag\.telemetry'
+[2026-04-06 12:39:47Z INFO JobRunner] Raising job completed against run service
+[2026-04-06 12:39:48Z INFO Worker] Job completed.
